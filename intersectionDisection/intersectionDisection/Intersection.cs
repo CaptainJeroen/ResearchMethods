@@ -76,10 +76,8 @@ namespace intersectionDisection
             {
                 case 4:
                     return fourWayIntersection();
-                    break;
                 default:
                     return fourWayIntersection();
-                    break;
             }
         }
 
@@ -90,15 +88,20 @@ namespace intersectionDisection
             {
                 scores[i] = calcScores();
             }
-            scores.Sort();
+            Array.Sort(scores);
 
             
-            return false;
+            return new bool[] { false};
+        }
+
+        private float calcScores()
+        {
+            throw new NotImplementedException();
         }
 
         private float calcScore()
         {
-
+            throw new NotImplementedException();
         }
 
     }
