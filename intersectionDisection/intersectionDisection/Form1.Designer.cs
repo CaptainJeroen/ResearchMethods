@@ -57,14 +57,14 @@ namespace intersectionDisection
         void Teken(object obj, PaintEventArgs pea)
         {
             Graphics g = pea.Graphics;
-            Pen hor = Pens.Black;
-            Pen ver = Pens.Black;
+            Brush hor = Brushes.Black;
+            Brush ver = Brushes.Black;
 
 
             if (this.intersection.HorizontalLight)
             {
-                hor = Pens.Green;
-                ver = Pens.Red;
+                hor = Brushes.Green;
+                ver = Brushes.Red;
             }
 
             g.DrawLine(Pens.Black, 400, 100, 400, 400);
