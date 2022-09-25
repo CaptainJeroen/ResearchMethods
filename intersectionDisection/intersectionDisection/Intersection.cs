@@ -13,6 +13,8 @@ namespace intersectionDisection
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
+        public int totalCarsPassed;
+
         public Intersection(int l = 4)
         {
             this.lanes = new int[l];
@@ -21,14 +23,14 @@ namespace intersectionDisection
             trafficLights[0] = true;
             trafficLights[2] = true;
         }
-        public bool HorizontalLight 
+        public bool HorizontalLight//Tijdelijk
         { 
             get 
             { 
                 return trafficLights[0]; 
             } 
         }
-        public bool VerticalLight 
+        public bool VerticalLight//Tijdelijk
         {
             get 
             { 
@@ -36,25 +38,28 @@ namespace intersectionDisection
             } 
         }
 
-        private void Model(int[] carsIn, int carsThrough, TrafficLights tl)
+        private void Model(int[] carsIn, int carsThrough, TrafficLights tl)//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
         {
-            Stopwatch cycle = null;//Kan ook wat anders
-            while (cycle == null) //Tijdelijk
-            {   
+            Stopwatch cycle = null;//Tijdelijk
+            int passed = 0;
+            while (cycle == null) //Tijdseenheid 1 auto die een stoplicht passeert?
+            {
+                //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
+                for (int i = 0; i < lanes.Length; i++)
+                {
+                    if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
+                    {
+                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);
+                        passed += Math.Min(this.lanes[i], carsThrough);
+                    }
+                }
                 //Elke cycle komen er bij elke baan auto's bij
                 for (int i = 0; i < lanes.Length; i++)
                 {
                     this.lanes[i] += carsIn[i];
                 }
-                //Elke cycle gaan er autos vanaf bij de stoplichten die op groen staan
-                for (int i = 0; i < lanes.Length; i++)
-                {
-                    if (this.trafficLights[i])
-                    {
-                        this.lanes[i] -= carsThrough;
-                    }
-                }
             }
+            this.totalCarsPassed += passed; 
         }
     }
 
@@ -98,11 +103,5 @@ namespace intersectionDisection
         {
             throw new NotImplementedException();
         }
-
-        private float calcScore()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }
