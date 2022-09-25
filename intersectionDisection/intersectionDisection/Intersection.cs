@@ -14,6 +14,7 @@ namespace intersectionDisection
         public bool lighthorizontal;
         public bool lightvertical;
         public int totalCarsPassed;
+        public int cyclesPassed = 0;
 
         public Intersection(int l = 4)
         {
@@ -24,20 +25,25 @@ namespace intersectionDisection
             trafficLights[2] = true;
         }
         public bool HorizontalLight//Tijdelijk
-        { 
-            get 
-            { 
-                return trafficLights[0]; 
-            } 
+        {
+            get
+            {
+                return trafficLights[0];
+            }
         }
         public bool VerticalLight//Tijdelijk
         {
-            get 
-            { 
-                return trafficLights[1]; 
-            } 
+            get
+            {
+                return trafficLights[1];
+            }
         }
-
+        /*
+        What to measure:
+        - Throughput
+        - Avg waiting time
+        ....
+        */
         private void Model(int[] carsIn, int carsThrough, TrafficLights tl)//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
         {
             Stopwatch cycle = null;//Tijdelijk
@@ -49,7 +55,8 @@ namespace intersectionDisection
                 {
                     if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
                     {
-                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);
+                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);// Misschien dat autos ook sneller voorbij kunnen rijden als een stoplicht op groen blijft
+                                                                                 // Ook tijd tussen rood en groen 
                         passed += Math.Min(this.lanes[i], carsThrough);
                     }
                 }
@@ -58,6 +65,7 @@ namespace intersectionDisection
                 {
                     this.lanes[i] += carsIn[i];
                 }
+                this.cyclesPassed++;
             }
             this.totalCarsPassed += passed; 
         }

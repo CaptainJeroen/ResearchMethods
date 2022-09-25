@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace intersectionDisection
 {
-    internal class Statistics
+    public class Car
     {
+        public int waitingTime;
+        public Car()
+        {
+            this.waitingTime = 0;
+        }
     }
 }
