@@ -9,16 +9,16 @@ namespace intersectionDisection
 {
     public class Intersection
     {
-        public int[] lanes;
+        public List<Car>[] lanes;
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
         public int totalCarsPassed;
         public int cyclesPassed = 0;
 
-        public Intersection(int l = 4)
+        public Intersection(int l = 4)// 4 of 8 of 12 niks anders
         {
-            this.lanes = new int[l];
+            this.lanes = new List<Car>[l];
             this.trafficLights = new bool[l];
             //Horizontal gets first green
             trafficLights[0] = true;
@@ -55,19 +55,27 @@ namespace intersectionDisection
                 {
                     if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
                     {
-                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);// Misschien dat autos ook sneller voorbij kunnen rijden als een stoplicht op groen blijft
-                                                                                 // Ook tijd tussen rood en groen 
-                        passed += Math.Min(this.lanes[i], carsThrough);
+                        // Ook tijd tussen rood en groen 
+                        this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
+                        passed += Math.Min(this.lanes[i].Count, carsThrough);
                     }
                 }
                 //Elke cycle komen er bij elke baan auto's bij
                 for (int i = 0; i < lanes.Length; i++)
                 {
-                    this.lanes[i] += carsIn[i];
+                    this.AddCars(this.lanes[i],carsIn[i]);
                 }
                 this.cyclesPassed++;
             }
             this.totalCarsPassed += passed; 
+        }
+        private void AddCars(List<Car> cars, int amount)
+        {
+            throw new NotImplementedException();    
+        }
+        private void RemoveCars(List<Car> cars, int amount)
+        {
+            throw new NotImplementedException();    
         }
     }
 
