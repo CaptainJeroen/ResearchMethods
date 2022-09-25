@@ -1,4 +1,7 @@
-﻿namespace intersectionDisection
+﻿using System.Drawing;
+using System.Windows.Forms;
+
+namespace intersectionDisection
 {
     partial class Form1
     {
@@ -28,13 +31,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // Form1
+            // 
+            //this.carsleft.Location = new Point()
+
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(1980, 1020);
+            this.Name = "Form1";
+            this.Text = "Intersection Disection";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        public void Panel()
+        {
+            this.Paint += this.Teken;
+        }
+
+        void Teken(object obj, PaintEventArgs pea)
+        {
+            Graphics g = pea.Graphics;
+            Pen hor = Pens.Black;
+            Pen ver = Pens.Black;
+
+
+            if (this.intersection.HorizontalLight)
+            {
+                hor = Pens.Green;
+                ver = Pens.Red;
+            }
+
+            g.DrawLine(Pens.Black, 400, 100, 400, 400);
+            g.DrawLine(Pens.Black, 100, 400, 400, 400);
+
+            g.DrawLine(Pens.Black, 600, 100, 600, 400);
+            g.DrawLine(Pens.Black, 600, 400, 900, 400);
+
+            g.DrawLine(Pens.Black, 400, 600, 400, 900);
+            g.DrawLine(Pens.Black, 100, 600, 400, 600);
+
+            g.DrawLine(Pens.Black, 600, 600, 600, 900);
+            g.DrawLine(Pens.Black, 600, 600, 900, 600);
+
+            g.FillEllipse(hor, 425, 325, 50, 50);
+            g.FillEllipse(hor, 525, 625, 50, 50);
+
+            g.FillEllipse(ver, 325, 525, 50, 50);
+            g.FillEllipse(ver, 625, 425, 50, 50);
+
+        }
     }
 }
 
