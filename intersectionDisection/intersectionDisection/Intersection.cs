@@ -53,7 +53,7 @@ namespace intersectionDisection
                 //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
                 for (int i = 0; i < lanes.Length; i++)
                 {
-                    if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
+                    if (this.trafficLights[i])//En misschien configuraties van stoplichten maken
                     {
                         // Ook tijd tussen rood en groen 
                         this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
