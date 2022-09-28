@@ -70,13 +70,13 @@ namespace intersectionDisection
             this.totalCarsPassed += passed; 
         }
         private void AddCars(List<Car> cars, int amount)
-        {
+        {//
             throw new NotImplementedException();    
         }
         private void RemoveCars(List<Car> cars, int amount)
         {
             throw new NotImplementedException();    
-        }
+        }//
     }
 
     class TrafficLights
