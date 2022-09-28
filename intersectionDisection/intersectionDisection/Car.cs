@@ -9,10 +9,8 @@ namespace intersectionDisection
     public class Car
     {
         public int waitingTime;
-        public int arrivalTime;
-        public Car(int arrival)
+        public Car()
         {
-            this.arrivalTime = arrival;
             this.waitingTime = 0;
         }
     }
