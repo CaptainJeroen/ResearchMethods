@@ -9,7 +9,7 @@ namespace intersectionDisection
 {
     public class Intersection
     {
-        public int[] lanes;
+        public List<Car>[] lanes;
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
@@ -108,7 +108,7 @@ namespace intersectionDisection
             float[] scores = new float[intersection.lanes.Length];
             for (int i = 0; i<=intersection.lanes.Length; i++)
             {
-                scores[i] = calcScores(intersection.lanes[i]);
+                scores[i] = calcScores(intersection.lanes[i].Count());
             }
 
             if ((scores[0] + scores[2])/2 > (scores[1] + scores[3]) / 2)
