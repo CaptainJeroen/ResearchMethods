@@ -9,7 +9,7 @@ namespace intersectionDisection
 {
     public class Intersection
     {
-        public List<Car>[] lanes;
+        public int[] lanes;
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
@@ -17,9 +17,9 @@ namespace intersectionDisection
         public int cyclesPassed = 0;
         public int cyclesWithoutChange = 1;
 
-        public Intersection(int l = 4)// 4 of 8 of 12 niks anders
+        public Intersection(int l = 4)
         {
-            this.lanes = new List<Car>[l];
+            this.lanes = new int[l];
             this.trafficLights = new bool[l];
             //Horizontal gets first green
             trafficLights[0] = true;
@@ -54,29 +54,21 @@ namespace intersectionDisection
                 //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
                 for (int i = 0; i < lanes.Length; i++)
                 {
-                    if (this.trafficLights[i])//En misschien configuraties van stoplichten maken
+                    if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
                     {
-                        // Ook tijd tussen rood en groen 
-                        this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
-                        passed += Math.Min(this.lanes[i].Count, carsThrough);
+                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);// Misschien dat autos ook sneller voorbij kunnen rijden als een stoplicht op groen blijft
+                                                                                 // Ook tijd tussen rood en groen 
+                        passed += Math.Min(this.lanes[i], carsThrough);
                     }
                 }
                 //Elke cycle komen er bij elke baan auto's bij
                 for (int i = 0; i < lanes.Length; i++)
                 {
-                    this.AddCars(this.lanes[i],carsIn[i]);
+                    this.lanes[i] += carsIn[i];
                 }
                 this.cyclesPassed++;
             }
             this.totalCarsPassed += passed; 
-        }
-        private void AddCars(List<Car> cars, int amount)
-        {
-            throw new NotImplementedException();    
-        }
-        private void RemoveCars(List<Car> cars, int amount)
-        {
-            throw new NotImplementedException();    
         }
     }
 
