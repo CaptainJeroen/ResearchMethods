@@ -9,12 +9,13 @@ namespace intersectionDisection
 {
     public class Intersection
     {
-        public List<Car>[] lanes;
+        public int[] lanes;
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
         public int totalCarsPassed;
         public int cyclesPassed = 0;
+        public int cyclesWithoutChange = 1;
 
         public Intersection(int l = 4)// 4 of 8 of 12 niks anders
         {
@@ -107,17 +108,22 @@ namespace intersectionDisection
             float[] scores = new float[intersection.lanes.Length];
             for (int i = 0; i<=intersection.lanes.Length; i++)
             {
-                scores[i] = calcScores();
+                scores[i] = calcScores(intersection.lanes[i]);
             }
-            Array.Sort(scores);
 
-            
-            return new bool[] { false};
+            if ((scores[0] + scores[2])/2 > (scores[1] + scores[3]) / 2)
+            {
+                return new bool[] { true, false, true, false };
+            }
+            else
+            {
+                return new bool[] { false, true, false, true };
+            }
         }
 
-        private float calcScores()
+        private float calcScores(int cars)
         {
-            throw new NotImplementedException();
+            return cars * throughput / (intersection.cyclesWithoutChange ^ fairness);  
         }
     }
 }
