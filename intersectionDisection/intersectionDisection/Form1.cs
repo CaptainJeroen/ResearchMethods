@@ -15,16 +15,25 @@ namespace intersectionDisection
     {
         public Intersection intersection;
         public TrafficLights trafficLights;
-
+        private Thread model;
 
         public Form1()
+        {
+
+
+            model = new Thread(test);
+            model.Start();
+        }
+
+        public void test()
         {
             InitializeComponent();
 
             this.trafficLights = new TrafficLights(1.3, 0.7, this.intersection);
-            this.intersection = new Intersection(new int[] { 2, 9, 6, 1 }, 10, this.trafficLights);
+            this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.Panel();
+
             while (intersection.cyclesPassed<=100)
             {
                 intersection.Model();
@@ -32,8 +41,9 @@ namespace intersectionDisection
                 this.label2.Text = intersection.lanes[1].Count.ToString();
                 this.label3.Text = intersection.lanes[2].Count.ToString();
                 this.label4.Text = intersection.lanes[3].Count.ToString();//denk ik
+                
+                this.Invalidate();
                 Thread.Sleep(100);
-                this.Refresh();
             }
         }
 
