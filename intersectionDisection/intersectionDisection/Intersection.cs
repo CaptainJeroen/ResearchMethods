@@ -4,22 +4,34 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace intersectionDisection
 {
     public class Intersection
     {
-        public int[] lanes;
+        public List<Car>[] lanes;
         public bool[] trafficLights;
         public bool lighthorizontal;
         public bool lightvertical;
         public int totalCarsPassed;
         public int cyclesPassed = 0;
         public int cyclesWithoutChange = 1;
+        private int[] carsIn;
+        private int carsThrough;
+        TrafficLights trafficL;
 
-        public Intersection(int l = 4)
+
+        public Intersection( int[] ci, int ct, TrafficLights tl, int l = 4)// l = 4 of 8 of 12 niks anders
         {
-            this.lanes = new int[l];
+            this.lanes = new List<Car>[l];
+            for(int i = 0; i < l; i++)
+            {
+                lanes[i] = new List<Car>();
+            }
+            this.carsIn = ci;
+            trafficL = tl;
+            this.carsThrough = ct;
             this.trafficLights = new bool[l];
             //Horizontal gets first green
             trafficLights[0] = true;
@@ -45,39 +57,54 @@ namespace intersectionDisection
         - Avg waiting time
         ....
         */
-        private void Model(int[] carsIn, int carsThrough, TrafficLights tl)//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
+        public void Model()//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
         {
-            Stopwatch cycle = null;//Tijdelijk
             int passed = 0;
-            while (cycle == null) //Tijdseenheid 1 auto die een stoplicht passeert?
+
+            //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
+            for (int i = 0; i < lanes.Length; i++)
             {
-                //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
-                for (int i = 0; i < lanes.Length; i++)
+                if (this.trafficLights[i])//En misschien configuraties van stoplichten maken
                 {
-                    if (this.trafficLights[i])//En misschien configuraties aan stoplichten maken
-                    {
-                        this.lanes[i] = Math.Min(this.lanes[i] - carsThrough, 0);// Misschien dat autos ook sneller voorbij kunnen rijden als een stoplicht op groen blijft
-                                                                                 // Ook tijd tussen rood en groen 
-                        passed += Math.Min(this.lanes[i], carsThrough);
-                    }
+                    // Ook tijd tussen rood en groen 
+                    this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
+                    passed += Math.Min(this.lanes[i].Count, carsThrough);
                 }
-                //Elke cycle komen er bij elke baan auto's bij
-                for (int i = 0; i < lanes.Length; i++)
-                {
-                    this.lanes[i] += carsIn[i];
-                }
-                this.cyclesPassed++;
             }
-            this.totalCarsPassed += passed; 
+            //Elke cycle komen er bij elke baan auto's bij
+            for (int i = 0; i < lanes.Length; i++)
+            {
+                this.AddCars(this.lanes[i],carsIn[i]);
+            }
+            this.cyclesPassed++;
+            this.totalCarsPassed += passed;
+            this.trafficLights = trafficL.Behaviour();
+            
+        }
+        void AddCars(List<Car> cars, int amount)
+        {//
+            for (int i = 0; i < amount; i++ )
+            {
+                cars.Add(new Car(cyclesPassed));
+
+            }    
+        }
+        private void RemoveCars(List<Car> cars, int amount)
+        {
+            int amountToRemove = cars.Count < amount ? cars.Count : amount;  
+            for(int i = 0; i< amountToRemove; i++)
+            {
+                cars.RemoveAt(0);
+            }
         }
     }
 
-    class TrafficLights
+    public class TrafficLights
     {
-        int fairness, throughput;
-        Intersection intersection;
+        double fairness, throughput;
+        public Intersection intersection;
 
-        public TrafficLights(int fr, int thrP, Intersection i)
+        public TrafficLights(double fr, double thrP, Intersection i)
         {
             fairness = fr;
             throughput = thrP;
@@ -97,10 +124,10 @@ namespace intersectionDisection
 
         private bool[] fourWayIntersection()
         {
-            float[] scores = new float[intersection.lanes.Length];
-            for (int i = 0; i<=intersection.lanes.Length; i++)
+            double[] scores = new double[intersection.lanes.Length];
+            for (int i = 0; i<intersection.lanes.Length; i++)
             {
-                scores[i] = calcScores(intersection.lanes[i]);
+                scores[i] = calcScores(intersection.lanes[i].Count());
             }
 
             if ((scores[0] + scores[2])/2 > (scores[1] + scores[3]) / 2)
@@ -113,9 +140,9 @@ namespace intersectionDisection
             }
         }
 
-        private float calcScores(int cars)
+        private double calcScores(int cars)
         {
-            return cars * throughput / (intersection.cyclesWithoutChange ^ fairness);  
+            return cars * throughput / Math.Pow(intersection.cyclesWithoutChange, fairness);  
         }
     }
 }
