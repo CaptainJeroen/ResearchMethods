@@ -16,7 +16,7 @@ namespace intersectionDisection
         public bool lightvertical;
         public int totalCarsPassed;
         public int cyclesPassed = 0;
-        public int cyclesWithoutChange = 1;
+        public int cyclesWithoutChange = 1;//Word nergens geupdate
         private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
@@ -67,8 +67,8 @@ namespace intersectionDisection
                 if (this.trafficLights[i])//En misschien configuraties van stoplichten maken
                 {
                     // Ook tijd tussen rood en groen 
-                    this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
                     passed += Math.Min(this.lanes[i].Count, carsThrough);
+                    this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
                 }
             }
             //Elke cycle komen er bij elke baan auto's bij
@@ -130,7 +130,7 @@ namespace intersectionDisection
                 scores[i] = calcScores(intersection.lanes[i].Count());
             }
 
-            if ((scores[0] + scores[2])/2 > (scores[1] + scores[3]) / 2)
+            if ((scores[0] + scores[2])/2 > (scores[1] + scores[3]) / 2)//Delen door 2 niet echt nodig toch?
             {
                 return new bool[] { true, false, true, false };
             }
