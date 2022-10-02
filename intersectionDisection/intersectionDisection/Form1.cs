@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -66,7 +67,21 @@ namespace intersectionDisection
             for(int i = 0; i<= maxValue; i++)
             {
                 frequencyArray[waitingTimes[i]]++;
-            }//Ook de autos die nog wachten ergens bij optellen
+            }
+        }
+        //Wachttijd van de auto's die nog wachten
+        private void CountOccurrencesWaitTime2()
+        {
+            List<int> frequencyList = new List<int>();
+            int totalWaitingCars = 0;
+            for (int i = 0; i <= this.intersection.lanes.Length; i++)
+            {
+                totalWaitingCars += this.intersection.lanes[i].Count();
+                for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
+                {
+                    frequencyList[this.intersection.lanes[i][j].waitingTime]++;
+                }
+            }
         }
 
         private string MakeString()
