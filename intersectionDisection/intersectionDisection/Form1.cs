@@ -15,41 +15,108 @@ namespace intersectionDisection
     {
         public Intersection intersection;
         public TrafficLights trafficLights;
-        private Thread model;
+
+        public delegate void delUpdateTextBox(string text);
+
+        Thread updateThread;
+        ThreadStart threadStart;
 
         public Form1()
         {
-
-
-            model = new Thread(test);
-            model.Start();
-        }
-
-        public void test()
-        {
-            InitializeComponent();
-
-            this.trafficLights = new TrafficLights(1.3, 0.7, this.intersection);
+            this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
             this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
-            this.Panel();
+            this.InitializeComponent();
+            threadStart = new ThreadStart(StartSimulation);
+            updateThread = new Thread(threadStart);
+            updateThread.Start();
+        }
 
+        public void StartSimulation()
+        {
             while (intersection.cyclesPassed<=100)
             {
-                intersection.Model();
-                this.label1.Text = intersection.lanes[0].Count.ToString();
-                this.label2.Text = intersection.lanes[1].Count.ToString();
-                this.label3.Text = intersection.lanes[2].Count.ToString();
-                this.label4.Text = intersection.lanes[3].Count.ToString();//denk ik
-                
+                this.intersection.Model();
+                this.AsyncUpdate();
                 this.Invalidate();
-                Thread.Sleep(100);
+                Thread.Sleep(1000);
             }
         }
 
-        private void Form1_Load(object sender, EventArgs e)
+        //SD = Standard diviation
+        private void CalculateSD(List<int> waitingTimes)
         {
+            float mean = this.intersection.totalWaitTime / this.intersection.totalCarsPassed;
+            List<float> standardDev = new List<float>();
+            for(int i = 0; i < waitingTimes.Count; i++)
+            {
+                standardDev.Add(waitingTimes[i] - mean);
+            }
+        }
+
+        private string MakeString()
+        {
+            string str = "";
+            for (int i = 0; i<intersection.lanes.Length; i++)
+            {
+                str+= intersection.lanes[i].Count.ToString();
+                if (i < intersection.lanes.Length - 1)
+                    str += "|";
+            }
+            return str;
+        }
+
+        private void AsyncUpdate()
+        {
+            delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
+            string str = MakeString();
+            this.label1.BeginInvoke(delUpdateTextBox, str);
             
+        }
+        private void UpdateLabel1(string text)
+        {
+            string[] str = text.Split('|');
+            this.label1.Text = str[0];
+            this.label2.Text = str[1];
+            this.label3.Text = str[2];
+            this.label4.Text = str[3];
+        }
+
+        void Teken(object obj, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+            Brush hor = Brushes.Black;
+            Brush ver = Brushes.Black;
+
+
+            if (this.intersection.HorizontalLight)
+            {
+                hor = Brushes.Green;
+                ver = Brushes.Red;
+            }
+            else
+            {
+                hor = Brushes.Red;
+                ver = Brushes.Green;
+            }
+
+            gr.DrawLine(Pens.Black, 400, 100, 400, 400); //   |
+            gr.DrawLine(Pens.Black, 100, 400, 400, 400); // --
+
+            gr.DrawLine(Pens.Black, 600, 100, 600, 400); //     |
+            gr.DrawLine(Pens.Black, 600, 400, 900, 400); //      --
+
+            gr.DrawLine(Pens.Black, 400, 600, 400, 900); //   |
+            gr.DrawLine(Pens.Black, 100, 600, 400, 600); // --
+
+            gr.DrawLine(Pens.Black, 600, 600, 600, 900); //     |
+            gr.DrawLine(Pens.Black, 600, 600, 900, 600); //      --
+
+            gr.FillEllipse(hor, 425, 325, 50, 50);
+            gr.FillEllipse(hor, 525, 625, 50, 50);
+
+            gr.FillEllipse(ver, 325, 525, 50, 50);
+            gr.FillEllipse(ver, 625, 425, 50, 50);
         }
 
     }
