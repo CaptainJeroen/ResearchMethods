@@ -23,8 +23,8 @@ namespace intersectionDisection
 
         public Form1()
         {
-            this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
-            this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
+            this.trafficLights = new TrafficLights(1.0, 10, this.intersection);
+            this.intersection = new Intersection(new int[] { 6, 6, 6, 6 }, 6, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent();
             threadStart = new ThreadStart(StartSimulation);
@@ -39,19 +39,34 @@ namespace intersectionDisection
                 this.intersection.Model();
                 this.AsyncUpdate();
                 this.Invalidate();
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
             }
+            CountOccurrencesWaitTime(this.intersection.waitingTimes);
+            ;
         }
 
         //SD = Standard diviation
-        private void CalculateSD(List<int> waitingTimes)
+        private void CalculateSDAndMean(List<int> waitingTimes)
         {
             float mean = this.intersection.totalWaitTime / this.intersection.totalCarsPassed;
-            List<float> standardDev = new List<float>();
+            List<double> deviations = new List<double>();
             for(int i = 0; i < waitingTimes.Count; i++)
             {
-                standardDev.Add(waitingTimes[i] - mean);
+                deviations.Add(Math.Pow((waitingTimes[i] - mean),2));
             }
+            double sumDeviations =  deviations.Sum();
+            double standardDeviation = Math.Sqrt(sumDeviations / this.intersection.totalCarsPassed);
+        }
+
+        private void CountOccurrencesWaitTime(List<int> waitingTimes)
+        {
+            //Make frequency table
+            int maxValue = waitingTimes.Max();
+            int[] frequencyArray = new int[maxValue + 1];
+            for(int i = 0; i<= maxValue; i++)
+            {
+                frequencyArray[waitingTimes[i]]++;
+            }//Ook de autos die nog wachten ergens bij optellen
         }
 
         private string MakeString()

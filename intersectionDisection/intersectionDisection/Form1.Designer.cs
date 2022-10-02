@@ -49,7 +49,7 @@ namespace intersectionDisection
 
 
 
-            switch (whatIntersection)
+            switch ("fourwayIntersection")
             {
                 case "fourwayIntersection":
                     this.fourwayIntersection();
