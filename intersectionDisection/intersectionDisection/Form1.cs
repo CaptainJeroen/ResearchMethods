@@ -15,6 +15,7 @@ namespace intersectionDisection
     {
         public Intersection intersection;
         public TrafficLights trafficLights;
+        private string whatInt = "fourwayIntersection";
 
         public delegate void delUpdateTextBox(string text);
 
@@ -26,7 +27,7 @@ namespace intersectionDisection
             this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
             this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
-            this.InitializeComponent();
+            this.InitializeComponent(whatInt);
             threadStart = new ThreadStart(StartSimulation);
             updateThread = new Thread(threadStart);
             updateThread.Start();

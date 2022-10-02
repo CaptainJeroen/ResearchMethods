@@ -39,9 +39,12 @@ namespace intersectionDisection
         private Label labeleast;
         private Label labelsouth;
         private Label labelwest;
-        private void InitializeComponent()
+        private ComboBox comboBox1 = new ComboBox();
+
+        private void InitializeComponent(string whatIntersection)
         {
             this.ClientSize = new System.Drawing.Size(1320, 663);
+
 
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
