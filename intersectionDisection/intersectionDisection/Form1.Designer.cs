@@ -29,18 +29,32 @@ namespace intersectionDisection
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
+        /// 
+        private Label label1;
+        private Label label2;
+        private Label label3;
+        private Label label4;
+        private Label labelnorth;
+        private Label labeleast;
+        private Label labelsouth;
+        private Label labelwest;
         private void InitializeComponent()
         {
+            this.ClientSize = new System.Drawing.Size(1320, 663);
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.labelnorth = new System.Windows.Forms.Label();
+            this.labeleast  = new System.Windows.Forms.Label();
+            this.labelsouth = new System.Windows.Forms.Label();
+            this.labelwest  = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(1161, 64);
+            this.label1.Location = new System.Drawing.Point(435, 50);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 13);
             this.label1.TabIndex = 0;
@@ -49,7 +63,7 @@ namespace intersectionDisection
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(1161, 103);
+            this.label2.Location = new System.Drawing.Point(985, 450);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(35, 13);
             this.label2.TabIndex = 1;
@@ -58,7 +72,7 @@ namespace intersectionDisection
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1161, 144);
+            this.label3.Location = new System.Drawing.Point(535, 950);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(35, 13);
             this.label3.TabIndex = 2;
@@ -67,79 +81,76 @@ namespace intersectionDisection
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(1161, 183);
+            this.label4.Location = new System.Drawing.Point(85, 550);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(35, 13);
             this.label4.TabIndex = 3;
             this.label4.Text = "West: ";
             // 
+            // labelnorth
+            // 
+            this.labelnorth.AutoSize = true;
+            this.labelnorth.Location = new System.Drawing.Point(400, 50);
+            this.labelnorth.Name = "labelnorth";
+            this.labelnorth.Size = new System.Drawing.Size(35, 13);
+            this.labelnorth.TabIndex = 4;
+            this.labelnorth.Text = "North: ";
+            // 
+            // labeleast
+            // 
+            this.labeleast.AutoSize = true;
+            this.labeleast.Location = new System.Drawing.Point(950, 450);
+            this.labeleast.Name = "labeleast";
+            this.labeleast.Size = new System.Drawing.Size(35, 13);
+            this.labeleast.TabIndex = 5;
+            this.labeleast.Text = "East: ";
+            // 
+            // labelsouth
+            // 
+            this.labelsouth.AutoSize = true;
+            this.labelsouth.Location = new System.Drawing.Point(500, 950);
+            this.labelsouth.Name = "labelsouth";
+            this.labelsouth.Size = new System.Drawing.Size(35, 13);
+            this.labelsouth.TabIndex = 6;
+            this.labelsouth.Text = "South: ";
+            // 
+            // labelwest
+            // 
+            this.labelwest.AutoSize = true;
+            this.labelwest.Location = new System.Drawing.Point(50, 550);
+            this.labelwest.Name = "labelwest";
+            this.labelwest.Size = new System.Drawing.Size(35, 13);
+            this.labelwest.TabIndex = 7;
+            this.labelwest.Text = "West: ";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1320, 663);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.labelnorth);
+            this.Controls.Add(this.labeleast);
+            this.Controls.Add(this.labelsouth);
+            this.Controls.Add(this.labelwest);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Intersection Disection";
-            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += this.Teken;
+            //this.Shown += StartSimulation;
+            //this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
 
-        public void Panel()
-        {
-            this.Paint += this.Teken;
-        }
 
-        void Teken(object obj, PaintEventArgs pea)
-        {
-            Graphics g = pea.Graphics;
-            Brush hor = Brushes.Black;
-            Brush ver = Brushes.Black;
+        
 
 
-            if (this.intersection.HorizontalLight)
-            {
-                hor = Brushes.Green;
-                ver = Brushes.Red;
-            }
-            else
-            {
-                hor = Brushes.Red;
-                ver = Brushes.Green;
-            }
-
-            g.DrawLine(Pens.Black, 400, 100, 400, 400);
-            g.DrawLine(Pens.Black, 100, 400, 400, 400);
-
-            g.DrawLine(Pens.Black, 600, 100, 600, 400);
-            g.DrawLine(Pens.Black, 600, 400, 900, 400);
-
-            g.DrawLine(Pens.Black, 400, 600, 400, 900);
-            g.DrawLine(Pens.Black, 100, 600, 400, 600);
-
-            g.DrawLine(Pens.Black, 600, 600, 600, 900);
-            g.DrawLine(Pens.Black, 600, 600, 900, 600);
-
-            g.FillEllipse(hor, 425, 325, 50, 50);
-            g.FillEllipse(hor, 525, 625, 50, 50);
-
-            g.FillEllipse(ver, 325, 525, 50, 50);
-            g.FillEllipse(ver, 625, 425, 50, 50);
-
-        }
-
-        private Label label1 = new Label();
-        private Label label2;
-        private Label label3;
-        private Label label4;
     }
 }
 
