@@ -8,7 +8,8 @@ namespace intersectionDisection
 {
     public class Car
     {
-        public int arrivalCycle; 
+        public int arrivalCycle;
+        public int waitingTime = 0;
         public Car(int a)
         {
             this.arrivalCycle = a;

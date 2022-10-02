@@ -23,8 +23,8 @@ namespace intersectionDisection
 
         public Form1()
         {
-            this.trafficLights = new TrafficLights(1.3, 0.7, this.intersection);
-            this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 1, this.trafficLights);
+            this.trafficLights = new TrafficLights(1.1, 1.7, this.intersection);
+            this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent();
             threadStart = new ThreadStart(StartSimulation);
@@ -48,10 +48,12 @@ namespace intersectionDisection
         {
             //
             string str = "";
-            str += intersection.lanes[0].Count.ToString() + "|";
-            str += intersection.lanes[1].Count.ToString() + "|";
-            str += intersection.lanes[2].Count.ToString() + "|";
-            str +=  intersection.lanes[3].Count.ToString();
+            for (int i = 0; i<intersection.lanes.Length; i++)
+            {
+                str+= intersection.lanes[i].Count.ToString();
+                if (i < intersection.lanes.Length - 1)
+                    str += "|";
+            }
             return str;
         }
 
@@ -71,7 +73,42 @@ namespace intersectionDisection
             this.label4.Text = str[3];
         }
 
+        void Teken(object obj, PaintEventArgs pea)
+        {
+            Graphics gr = pea.Graphics;
+            Brush hor = Brushes.Black;
+            Brush ver = Brushes.Black;
 
+
+            if (this.intersection.HorizontalLight)
+            {
+                hor = Brushes.Green;
+                ver = Brushes.Red;
+            }
+            else
+            {
+                hor = Brushes.Red;
+                ver = Brushes.Green;
+            }
+
+            gr.DrawLine(Pens.Black, 400, 100, 400, 400); //   |
+            gr.DrawLine(Pens.Black, 100, 400, 400, 400); // --
+
+            gr.DrawLine(Pens.Black, 600, 100, 600, 400); //     |
+            gr.DrawLine(Pens.Black, 600, 400, 900, 400); //      --
+
+            gr.DrawLine(Pens.Black, 400, 600, 400, 900); //   |
+            gr.DrawLine(Pens.Black, 100, 600, 400, 600); // --
+
+            gr.DrawLine(Pens.Black, 600, 600, 600, 900); //     |
+            gr.DrawLine(Pens.Black, 600, 600, 900, 600); //      --
+
+            gr.FillEllipse(hor, 425, 325, 50, 50);
+            gr.FillEllipse(hor, 525, 625, 50, 50);
+
+            gr.FillEllipse(ver, 325, 525, 50, 50);
+            gr.FillEllipse(ver, 625, 425, 50, 50);
+        }
 
     }
 }
