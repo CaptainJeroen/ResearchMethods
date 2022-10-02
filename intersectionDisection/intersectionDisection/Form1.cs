@@ -40,7 +40,6 @@ namespace intersectionDisection
                 this.AsyncUpdate();
                 this.Invalidate();
                 Thread.Sleep(1000);
-               
             }
         }
 

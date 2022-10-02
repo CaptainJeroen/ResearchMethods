@@ -15,6 +15,7 @@ namespace intersectionDisection
         public bool lighthorizontal;
         public bool lightvertical;
         public int totalCarsPassed;
+        public int totalWaitTime = 0;
         public int cyclesPassed = 0;
         public int cyclesWithoutChange = 0;
         private int[] carsIn;
@@ -60,7 +61,6 @@ namespace intersectionDisection
         public void Model()//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
         {
             int passed = 0;
-
             //Elke cycle gaan er autos af, bij de stoplichten die op groen staan
             for (int i = 0; i < this.lanes.Length; i++)
             {
@@ -102,6 +102,7 @@ namespace intersectionDisection
             int amountToRemove = cars.Count < amount ? cars.Count : amount;  
             for(int i = 0; i< amountToRemove; i++)
             {
+                totalWaitTime += cars[0].waitingTime;
                 cars.RemoveAt(0);
             }
         }
