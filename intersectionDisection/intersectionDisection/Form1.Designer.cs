@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace intersectionDisection
@@ -41,14 +42,44 @@ namespace intersectionDisection
         private void InitializeComponent()
         {
             this.ClientSize = new System.Drawing.Size(1320, 663);
+
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "Form1";
+            this.Text = "Intersection Disection";
+
+
+
+            switch (whatIntersection)
+            {
+                case "fourwayIntersection":
+                    this.fourwayIntersection();
+                    this.Paint += this.Teken;
+                    break;
+                case "fourwayWithLeftLane":
+                    this.fourwayWithLeftLane();
+                    break;
+                default:
+                    this.fourwayIntersection();
+                    this.Paint += this.Teken;
+                    break;
+            }
+
+            //this.Shown += StartSimulation;
+            //this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+        }
+
+        private void fourwayIntersection()
+        {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.labelnorth = new System.Windows.Forms.Label();
-            this.labeleast  = new System.Windows.Forms.Label();
+            this.labeleast = new System.Windows.Forms.Label();
             this.labelsouth = new System.Windows.Forms.Label();
-            this.labelwest  = new System.Windows.Forms.Label();
+            this.labelwest = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -135,22 +166,13 @@ namespace intersectionDisection
             this.Controls.Add(this.labeleast);
             this.Controls.Add(this.labelsouth);
             this.Controls.Add(this.labelwest);
-            this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "Form1";
-            this.Text = "Intersection Disection";
-            this.Paint += this.Teken;
-            //this.Shown += StartSimulation;
-            //this.Load += new System.EventHandler(this.Form1_Load);
-            this.ResumeLayout(false);
-            this.PerformLayout();
         }
 
+        private void fourwayWithLeftLane()
+        {
+            throw new NotImplementedException();
+        }
         #endregion
-
-
-        
-
-
     }
 }
 
