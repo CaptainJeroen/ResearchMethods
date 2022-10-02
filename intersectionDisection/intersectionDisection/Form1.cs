@@ -17,6 +17,8 @@ namespace intersectionDisection
         public TrafficLights trafficLights;
 
         public delegate void delUpdateTextBox(string text);
+        public delegate void delUpdateTextBox(string text);
+
 
         Thread updateThread;
         ThreadStart threadStart;
@@ -70,6 +72,11 @@ namespace intersectionDisection
             this.label2.Text = str[1];
             this.label3.Text = str[2];
             this.label4.Text = str[3];
+        }
+
+        private void UpdateOtherLabels(string text)
+        {
+
         }
 
         void Teken(object obj, PaintEventArgs pea)
