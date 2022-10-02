@@ -17,7 +17,7 @@ namespace intersectionDisection
         public TrafficLights trafficLights;
 
         public delegate void delUpdateTextBox(string text);
-        public delegate void delUpdateTextBox(string text);
+        public delegate void delUpdateTextBox1(string text);
 
 
         Thread updateThread;
@@ -39,10 +39,17 @@ namespace intersectionDisection
             while (intersection.cyclesPassed<=100)
             {
                 this.intersection.Model();
-                this.AsyncUpdate();
+                this.UpdateLaneCount();
+                this.UpdateLabels();
                 this.Invalidate();
                 Thread.Sleep(1000);
             }
+        }
+
+        private void UpdateLabels()
+        {
+            delUpdateTextBox1 delUpdateTextBox1 = new delUpdateTextBox1(UpdateOtherLabels);
+            this.labelnorthwaitnumber.BeginInvoke(delUpdateTextBox1, "");
         }
 
         private string MakeString()//We willen trouwens niet de labels update maar er tekstboxes naast plaatsen
@@ -58,12 +65,11 @@ namespace intersectionDisection
             return str;
         }
 
-        private void AsyncUpdate()
+        private void UpdateLaneCount()
         {
             delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
             string str = MakeString();
             this.label1.BeginInvoke(delUpdateTextBox, str);
-            
         }
         private void UpdateLabel1(string text)
         {
@@ -76,9 +82,21 @@ namespace intersectionDisection
 
         private void UpdateOtherLabels(string text)
         {
+            this.labelnorthwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
+            this.labeleastwaitnumber.Text = "cdcd";
+            this.labelwestwaitnumber.Text = "wes";
+            this.labelsouthwaitnumber.Text = "dw";
 
         }
-
+        private int GetTotalWaitingTimeLane(List<Car> lane)
+        {
+            int res = 0;
+            for (int i = 0; i < lane.Count; i++)
+            {
+                res += lane[i].waitingTime;
+            }
+            return res;
+        }
         void Teken(object obj, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;

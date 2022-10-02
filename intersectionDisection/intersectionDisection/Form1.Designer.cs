@@ -179,7 +179,7 @@ namespace intersectionDisection
             // labelnorthwaitnumber
             // 
             this.labelnorthwaitnumber.AutoSize = true;
-            this.labelnorthwaitnumber.Location = new System.Drawing.Point(435, 70);
+            this.labelnorthwaitnumber.Location = new System.Drawing.Point(470, 70);
             this.labelnorthwaitnumber.Name = "labelnorthwaitnumber";
             this.labelnorthwaitnumber.Size = new System.Drawing.Size(35, 13);
             this.labelnorthwaitnumber.TabIndex = 12;
@@ -188,7 +188,7 @@ namespace intersectionDisection
             // labeleastwaitnumber
             // 
             this.labeleastwaitnumber.AutoSize = true;
-            this.labeleastwaitnumber.Location = new System.Drawing.Point(985, 470);
+            this.labeleastwaitnumber.Location = new System.Drawing.Point(1020, 470);
             this.labeleastwaitnumber.Name = "labeleastwait";
             this.labeleastwaitnumber.Size = new System.Drawing.Size(35, 13);
             this.labeleastwaitnumber.TabIndex = 13;
@@ -197,7 +197,7 @@ namespace intersectionDisection
             // labelsouthwaitnumber
             // 
             this.labelsouthwaitnumber.AutoSize = true;
-            this.labelsouthwaitnumber.Location = new System.Drawing.Point(535, 970);
+            this.labelsouthwaitnumber.Location = new System.Drawing.Point(570, 970);
             this.labelsouthwaitnumber.Name = "labelsouthwait";
             this.labelsouthwaitnumber.Size = new System.Drawing.Size(35, 13);
             this.labelsouthwaitnumber.TabIndex = 14;
@@ -206,7 +206,7 @@ namespace intersectionDisection
             // labelwestwaitnumber
             // 
             this.labelwestwaitnumber.AutoSize = true;
-            this.labelwestwaitnumber.Location = new System.Drawing.Point(85, 570);
+            this.labelwestwaitnumber.Location = new System.Drawing.Point(120, 570);
             this.labelwestwaitnumber.Name = "labelwestwait";
             this.labelwestwaitnumber.Size = new System.Drawing.Size(35, 13);
             this.labelwestwaitnumber.TabIndex = 15;

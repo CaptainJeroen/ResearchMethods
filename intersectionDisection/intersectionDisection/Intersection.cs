@@ -107,15 +107,7 @@ namespace intersectionDisection
             }
         }
 
-        private int GetTotalWaitingTimeLane(List<Car> lane)
-        {
-            int res = 0;
-            for(int i = 0; i < lane.Count; i++)
-            {
-                res+= lane[i].waitingTime;
-            }
-            return res;
-        }
+
     }
 
     public class TrafficLights
