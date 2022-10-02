@@ -23,7 +23,7 @@ namespace intersectionDisection
 
         public Form1()
         {
-            this.trafficLights = new TrafficLights(1.1, 1.7, this.intersection);
+            this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
             this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent();
@@ -43,9 +43,19 @@ namespace intersectionDisection
             }
         }
 
-        private string MakeString()//We willen trouwens niet de labels update maar er tekstboxes naast plaatsen
+        //SD = Standard diviation
+        private void CalculateSD(List<int> waitingTimes)
         {
-            //
+            float mean = this.intersection.totalWaitTime / this.intersection.totalCarsPassed;
+            List<float> standardDev = new List<float>();
+            for(int i = 0; i < waitingTimes.Count; i++)
+            {
+                standardDev.Add(waitingTimes[i] - mean);
+            }
+        }
+
+        private string MakeString()
+        {
             string str = "";
             for (int i = 0; i<intersection.lanes.Length; i++)
             {

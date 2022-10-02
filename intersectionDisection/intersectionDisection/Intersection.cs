@@ -21,6 +21,7 @@ namespace intersectionDisection
         private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
+        public List<int> waitingTimes = new List<int>();
 
 
         public Intersection( int[] ci, int ct, TrafficLights tl, int l = 4)// l = 4 of 8 of 12 niks anders
@@ -102,12 +103,13 @@ namespace intersectionDisection
             int amountToRemove = cars.Count < amount ? cars.Count : amount;  
             for(int i = 0; i< amountToRemove; i++)
             {
-                totalWaitTime += cars[0].waitingTime;
+                totalWaitTime += cars[0].waitingTime;// In een aparte list
+                waitingTimes.Add(cars[0].waitingTime);
                 cars.RemoveAt(0);
             }
         }
 
-        private int GetTotalWaitingTimeLane(List<Car> lane)
+        private int GetTotalCurrentWaitingTimeLane(List<Car> lane)
         {
             int res = 0;
             for(int i = 0; i < lane.Count; i++)
@@ -146,7 +148,7 @@ namespace intersectionDisection
             double[] scores = new double[intersection.lanes.Length];
             for (int i = 0; i<intersection.lanes.Length; i++)
             {
-                scores[i] = CalcScores(intersection.lanes[i].Count());
+                scores[i] = CalcScores(intersection.lanes[i].Count(), i);
             }
 
             if ((scores[0] + scores[2]) > (scores[1] + scores[3]))
@@ -169,9 +171,9 @@ namespace intersectionDisection
             else
                 this.intersection.cyclesWithoutChange = 0;
         }
-        private double CalcScores(int cars)
+        private double CalcScores(int cars, int laneIndex)
         {
-            return cars * throughput / Math.Pow(intersection.cyclesWithoutChange, fairness);  
+            return cars * throughput / Math.Pow(fairness , intersection.cyclesWithoutChange);  
         }
     }
 }
