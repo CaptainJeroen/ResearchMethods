@@ -41,36 +41,90 @@ namespace intersectionDisection
         private Label labelwest;
         private void InitializeComponent()
         {
-            this.ClientSize = new System.Drawing.Size(1320, 663);
 
+
+            Init();
+        }
+
+        private void Init()
+        {
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.chart2 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart2)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // chart2
+            // 
+            chartArea2.Name = "ChartArea2";
+            this.chart2.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend2";
+            this.chart2.Legends.Add(legend2);
+            this.chart2.Location = new System.Drawing.Point(850, 500);
+            this.chart2.Name = "chart2";
+            series2.ChartArea = "ChartArea2";
+            series2.Legend = "Legend2";
+            series2.Name = "Series2";
+            this.chart2.Series.Add(series2);
+            this.chart2.Size = new System.Drawing.Size(400, 400);
+            this.chart2.TabIndex = 0;
+            this.chart2.Text = "chart2";
+
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // chart1
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
+            this.chart1.Location = new System.Drawing.Point(850, 0);
+            this.chart1.Name = "chart1";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chart1.Series.Add(series1);
+            this.chart1.Size = new System.Drawing.Size(400, 400);
+            this.chart1.TabIndex = 0;
+            this.chart1.Text = "chart1";
+            // 
+            // Form1
+            // 
+            this.ClientSize = new System.Drawing.Size(1320, 663);
+            this.Controls.Add(this.chart1);
+            this.Controls.Add(this.chart2);
+            this.Name = "Form1";
+            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
+            this.ResumeLayout(false);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Intersection Disection";
-
-
-
-            switch ("fourwayIntersection")
-            {
-                case "fourwayIntersection":
-                    this.fourwayIntersection();
-                    this.Paint += this.Teken;
-                    break;
-                case "fourwayWithLeftLane":
-                    this.fourwayWithLeftLane();
-                    break;
-                default:
-                    this.fourwayIntersection();
-                    this.Paint += this.Teken;
-                    break;
-            }
-
-            //this.Shown += StartSimulation;
-            //this.Load += new System.EventHandler(this.Form1_Load);
+            this.FourwayIntersection();
+            this.Paint += this.Teken;
             this.ResumeLayout(false);
             this.PerformLayout();
-        }
+            //string temp = "fourwayIntersection";
+            //switch (temp)
+            //{
+            //    case "fourwayIntersection":
 
-        private void fourwayIntersection()
+            //        break;
+            //    case "fourwayWithLeftLane":
+            //        this.fourwayWithLeftLane();
+            //        break;
+            //    default:
+            //        this.fourwayIntersection();
+            //        this.Paint += this.Teken;
+            //        break;
+            //}
+        }
+        private void FourwayIntersection()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -173,6 +227,9 @@ namespace intersectionDisection
             throw new NotImplementedException();
         }
         #endregion
+
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart2;
     }
 }
 
