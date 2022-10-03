@@ -82,11 +82,14 @@ namespace intersectionDisection
 
         private void UpdateOtherLabels(string text)
         {
-            this.labelnorthwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
-            this.labeleastwaitnumber.Text = "cdcd";
-            this.labelwestwaitnumber.Text = "wes";
-            this.labelsouthwaitnumber.Text = "dw";
-
+            this.labelnorthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
+            this.labeleastwaitnumber.Text   = GetTotalWaitingTimeLane(this.intersection.lanes[1]).ToString();
+            this.labelsouthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[2]).ToString();
+            this.labelwestwaitnumber.Text   = GetTotalWaitingTimeLane(this.intersection.lanes[3]).ToString();
+            this.labeltotalcarspassednumber.Text        = this.intersection.totalCarsPassed.ToString();
+            this.labeltotalwaittimenumber.Text          = this.intersection.totalWaitTime.ToString();
+            this.labelcyclespassednumber.Text           = this.intersection.cyclesPassed.ToString();
+            this.labelcycleswithoutchangenumber.Text    = this.intersection.cyclesWithoutChange.ToString();
         }
         private int GetTotalWaitingTimeLane(List<Car> lane)
         {
