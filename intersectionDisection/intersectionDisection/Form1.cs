@@ -15,7 +15,7 @@ namespace intersectionDisection
     {
         public Intersection intersection;
         public TrafficLights trafficLights;
-        private string whatInt = "fourwayIntersection"; // fourwayWithLeftLane, fourwayIntersection
+        private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
         public delegate void delUpdateTextBox(string text);
 
@@ -25,7 +25,8 @@ namespace intersectionDisection
         public Form1()
         {
             this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
-            this.intersection = new Intersection(new int[] { 2, 3, 4, 1 }, 10, this.trafficLights);
+            this.intersection = new Intersection(new int[] { 4, 3, 4, 1, 5, 2, 7, 3 }, 10, this.trafficLights, 8);
+            //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent(whatInt);
 
@@ -87,23 +88,12 @@ namespace intersectionDisection
         void TekenFourWay(object obj, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
-            Brush hor = Brushes.Black;
-            Brush ver = Brushes.Black;
+            Brush hor = this.intersection.trafficLights[0] ? Brushes.Green : Brushes.Red;
+            Brush ver = this.intersection.trafficLights[1] ? Brushes.Green : Brushes.Red;
 
             Pen smalPen = new Pen(Color.Black, 1);
             Pen bigPen = new Pen(Color.Black, 2);
 
-
-            if (this.intersection.HorizontalLight)
-            {
-                hor = Brushes.Green;
-                ver = Brushes.Red;
-            }
-            else
-            {
-                hor = Brushes.Red;
-                ver = Brushes.Green;
-            }
 
             gr.DrawLine(bigPen, 200, 50, 200, 200); //   |
             gr.DrawLine(bigPen, 50, 200, 200, 200); // --
@@ -132,23 +122,14 @@ namespace intersectionDisection
         void TekenFourWayWithLeftLane(object obj, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
-            Brush hor = Brushes.Black;
-            Brush ver = Brushes.Black;
+            Brush verSt = this.intersection.trafficLights[0] ? Brushes.Green : Brushes.Red;
+            Brush verLt = this.intersection.trafficLights[1] ? Brushes.Green : Brushes.Red;
+            Brush horSt = this.intersection.trafficLights[2] ? Brushes.Green : Brushes.Red;
+            Brush horLt = this.intersection.trafficLights[3] ? Brushes.Green : Brushes.Red;
             Pen dashPen = new Pen(Color.Black, 1) { DashPattern = new[] { 5f, 5f } };
             Pen smalPen = new Pen(Color.Black, 1);
             Pen bigPen = new Pen(Color.Black, 2);
 
-
-            if (this.intersection.HorizontalLight)
-            {
-                hor = Brushes.Green;
-                ver = Brushes.Red;
-            }
-            else
-            {
-                hor = Brushes.Red;
-                ver = Brushes.Green;
-            }
 
             gr.DrawLine(bigPen, 200, 50, 200, 200); //   |
             gr.DrawLine(bigPen, 50, 200, 200, 200); // --
@@ -170,16 +151,16 @@ namespace intersectionDisection
             gr.DrawLine(smalPen, 350, 300, 500, 300);
             gr.DrawLine(dashPen, 350, 250, 425, 250);
 
-            gr.FillEllipse(hor, 180, 320, 20, 20);
-            gr.FillEllipse(hor, 300, 210, 20, 20);
-            gr.FillEllipse(hor, 300, 210, 20, 20);
-            gr.FillEllipse(hor, 300, 210, 20, 20);
+            gr.FillEllipse(horSt, 180, 320, 20, 20);
+            gr.FillEllipse(horSt, 350, 210, 20, 20);
+            gr.FillEllipse(horLt, 180, 270, 20, 20);
+            gr.FillEllipse(horLt, 350, 260, 20, 20);
 
 
-            gr.FillEllipse(ver, 210, 180, 20, 20);
-            gr.FillEllipse(ver, 320, 300, 20, 20);
-            gr.FillEllipse(ver, 320, 300, 20, 20);
-            gr.FillEllipse(ver, 320, 300, 20, 20);
+            gr.FillEllipse(verSt, 210, 180, 20, 20);
+            gr.FillEllipse(verSt, 320, 350, 20, 20);
+            gr.FillEllipse(verLt, 260, 180, 20, 20);
+            gr.FillEllipse(verLt, 270, 350, 20, 20);
 
         }
 

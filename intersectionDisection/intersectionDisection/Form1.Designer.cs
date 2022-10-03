@@ -124,7 +124,7 @@ namespace intersectionDisection
             // labelnorth
             // 
             this.labelnorth.AutoSize = true;
-            this.labelnorth.Location = new System.Drawing.Point(400, 50);
+            this.labelnorth.Location = new System.Drawing.Point(150, 50);
             this.labelnorth.Name = "labelnorth";
             this.labelnorth.Size = new System.Drawing.Size(35, 13);
             this.labelnorth.TabIndex = 4;
@@ -133,7 +133,7 @@ namespace intersectionDisection
             // labeleast
             // 
             this.labeleast.AutoSize = true;
-            this.labeleast.Location = new System.Drawing.Point(950, 450);
+            this.labeleast.Location = new System.Drawing.Point(350, 180);
             this.labeleast.Name = "labeleast";
             this.labeleast.Size = new System.Drawing.Size(35, 13);
             this.labeleast.TabIndex = 5;
@@ -142,7 +142,7 @@ namespace intersectionDisection
             // labelsouth
             // 
             this.labelsouth.AutoSize = true;
-            this.labelsouth.Location = new System.Drawing.Point(500, 950);
+            this.labelsouth.Location = new System.Drawing.Point(310, 350);
             this.labelsouth.Name = "labelsouth";
             this.labelsouth.Size = new System.Drawing.Size(35, 13);
             this.labelsouth.TabIndex = 6;
@@ -151,7 +151,7 @@ namespace intersectionDisection
             // labelwest
             // 
             this.labelwest.AutoSize = true;
-            this.labelwest.Location = new System.Drawing.Point(50, 550);
+            this.labelwest.Location = new System.Drawing.Point(50, 210);
             this.labelwest.Name = "labelwest";
             this.labelwest.Size = new System.Drawing.Size(35, 13);
             this.labelwest.TabIndex = 7;

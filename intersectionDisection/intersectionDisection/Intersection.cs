@@ -10,15 +10,13 @@ namespace intersectionDisection
 {
     public class Intersection
     {
-        public List<Car>[] lanes;
-        public bool[] trafficLights;
-        public bool lighthorizontal;
-        public bool lightvertical;
+        public List<Car>[] lanes; // north, east, south, west
+        public bool[] trafficLights; // north, east, south, west
         public int totalCarsPassed;
         public int totalWaitTime = 0;
         public int cyclesPassed = 0;
         public int cyclesWithoutChange = 0;
-        private int[] carsIn;
+        private int[] carsIn; // north, east, south, west
         private int carsThrough;
         TrafficLights trafficL;
         public List<int> waitingTimes = new List<int>();
@@ -39,20 +37,7 @@ namespace intersectionDisection
             trafficLights[0] = true;
             trafficLights[2] = true;
         }
-        public bool HorizontalLight//Tijdelijk
-        {
-            get
-            {
-                return trafficLights[0];
-            }
-        }
-        public bool VerticalLight//Tijdelijk
-        {
-            get
-            {
-                return trafficLights[1];
-            }
-        }
+
         /*
         What to measure:
         - Throughput
@@ -138,6 +123,8 @@ namespace intersectionDisection
             {
                 case 4:
                     return FourWayIntersection();
+                case 8:
+                    return fourWayWithLeftLane();
                 default:
                     return FourWayIntersection();
             }
@@ -164,6 +151,29 @@ namespace intersectionDisection
                 return newTrafficLights;
             }
         }
+
+        private bool[] fourWayWithLeftLane()
+        {
+            double[] scores = new double[intersection.lanes.Length];
+            for (int i = 0; i < intersection.lanes.Length; i++)
+            {
+                scores[i] = CalcScores(intersection.lanes[i].Count(), i);
+            }
+
+            List<(double, int)> means = new List<(double,int)> { (scores[0] + scores[4], 0), (scores[1] + scores[5], 1), (scores[2] + scores[6], 2), (scores[3] + scores[7], 3) };
+
+            means.Sort((x, y) => y.Item1.CompareTo(x.Item1));
+
+            bool[] newTrafficLights = new bool[] { false, false, false, false ,false, false, false, false};
+
+            newTrafficLights[means[0].Item2] = true;
+            newTrafficLights[means[0].Item2 + 4] = true;
+
+            this.CompairTrafficLights(newTrafficLights, this.intersection.trafficLights);
+
+            return newTrafficLights;
+        }
+
         private void CompairTrafficLights(bool[] light1, bool[] light2)
         {
             if (Enumerable.SequenceEqual(light1, light2))
