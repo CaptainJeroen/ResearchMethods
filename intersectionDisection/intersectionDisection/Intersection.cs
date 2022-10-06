@@ -15,8 +15,8 @@ namespace intersectionDisection
         public int totalCarsPassed;
         public int totalWaitTime = 0;
         public int cyclesPassed = 0;
-        public int cyclesWithoutChange = 0;
-        private int[] carsIn; // north, east, south, west
+        public int cyclesWithoutChange = 1;
+        private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
         public List<int> waitingTimes = new List<int>();
@@ -52,7 +52,7 @@ namespace intersectionDisection
             {
                 if (this.trafficLights[i])//En misschien configuraties van stoplichten maken
                 {
-                    // Ook tijd tussen rood en groen 
+                    // Ook tijd tussen rood en groen?
                     passed += Math.Min(this.lanes[i].Count, carsThrough);
                     this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
                 }

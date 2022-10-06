@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace intersectionDisection
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
         public delegate void delUpdateTextBox(string text);
+        public delegate void delUpdateChart();
 
         Thread updateThread;
         ThreadStart threadStart;
@@ -42,19 +44,141 @@ namespace intersectionDisection
                 this.intersection.Model();
                 this.AsyncUpdate();
                 this.Invalidate();
-                Thread.Sleep(1000);
+                Thread.Sleep(10);
             }
+            UpdateChart();
         }
 
         //SD = Standard diviation
-        private void CalculateSD(List<int> waitingTimes)
+        private void CalculateSDAndMean(List<int> waitingTimes)
         {
             float mean = this.intersection.totalWaitTime / this.intersection.totalCarsPassed;
-            List<float> standardDev = new List<float>();
+            List<double> deviations = new List<double>();
             for(int i = 0; i < waitingTimes.Count; i++)
             {
-                standardDev.Add(waitingTimes[i] - mean);
+                deviations.Add(Math.Pow((waitingTimes[i] - mean),2));
             }
+            double sumDeviations =  deviations.Sum();
+            double standardDeviation = Math.Sqrt(sumDeviations / this.intersection.totalCarsPassed);
+        }
+        private void UpdateChart()
+        {
+            delUpdateChart delUpdateChart = new delUpdateChart(UpdateCart1);
+            this.chart1.BeginInvoke(delUpdateChart);
+            ;
+        }
+
+        private void UpdateCart1()
+        {
+            var frequencyArray = CountOccurrencesWaitTime(this.intersection.waitingTimes);
+            for (int i = 0; i < frequencyArray.Length; i++)
+            {
+                this.chart1.Series["Series1"].Points.AddXY(i, frequencyArray[i]);
+            }
+
+            var axis = this.chart1.ChartAreas[0].AxisX;
+            
+
+            var minIndex = 0;
+            for (int i = 0; i < frequencyArray.Length; i++)
+            {
+                if (frequencyArray[i] != 0)
+                {
+                    minIndex = i;
+                    break;
+                } 
+
+            }
+
+            var maxIndex = 0; 
+            for (int i = frequencyArray.Length -1; i>=0; i--)
+            {
+                if (frequencyArray[i] != 0)
+                {
+                    maxIndex = i;
+                    break;
+                }
+            }
+            axis.Minimum = minIndex -1;
+            axis.Maximum = maxIndex + 2;
+
+            //update chart 2
+            UpdateChart2();
+        }
+
+
+        private int[] CountOccurrencesWaitTime(List<int> waitingTimes)
+        {
+            //Make frequency table
+            int maxValue = waitingTimes.Max();
+            int[] frequencyArray = new int[maxValue + 1];
+            for(int i = 0; i<= waitingTimes.Count() -1; i++)
+            {
+                frequencyArray[waitingTimes[i]]++;
+            }
+            return frequencyArray;
+
+
+        }
+        private void UpdateChart2()
+        {
+            var frequencyArray = CountOccurrencesWaitTime2();
+            for (int i = 0; i < frequencyArray.Count(); i++)
+            {
+                this.chart2.Series["Series2"].Points.AddXY(i, frequencyArray[i]);
+            }
+
+            var axis = this.chart2.ChartAreas[0].AxisX;
+
+
+            var minIndex = 0;
+            for (int i = 0; i < frequencyArray.Count(); i++)
+            {
+                if (frequencyArray[i] != 0)
+                {
+                    minIndex = i;
+                    break;
+                }
+
+            }
+
+            var maxIndex = 0;
+            for (int i = frequencyArray.Count() - 1; i >= 0; i--)
+            {
+                if (frequencyArray[i] != 0)
+                {
+                    maxIndex = i;
+                    break;
+                }
+            }
+            axis.Minimum = minIndex - 1;
+            axis.Maximum = maxIndex + 2;
+        }
+        //Wachttijd van de auto's die nog wachten
+        private int[] CountOccurrencesWaitTime2()
+        {
+            int totalWaitingCars = 0;
+            int maxValue = 0;
+            for (int i = 0; i < this.intersection.lanes.Length; i++)
+            {
+                totalWaitingCars += this.intersection.lanes[i].Count();
+                for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
+                {
+                    if (this.intersection.lanes[i][j].waitingTime > maxValue)
+                        maxValue = this.intersection.lanes[i][j].waitingTime;
+                }
+            }
+            int[] frequencyArray = new int[maxValue +1];
+            for (int i = 0; i < this.intersection.lanes.Length; i++)
+            {
+                for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
+                {
+                    frequencyArray[this.intersection.lanes[i][j].waitingTime]++;
+                }
+            }
+
+            return frequencyArray;
+
         }
 
         private string MakeString()
@@ -69,7 +193,10 @@ namespace intersectionDisection
             return str;
         }
 
-        private void AsyncUpdate()
+
+
+
+    private void AsyncUpdate()
         {
             delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
             string str = MakeString();
