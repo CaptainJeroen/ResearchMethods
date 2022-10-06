@@ -43,10 +43,10 @@ namespace intersectionDisection
 
         private void InitializeComponent(string whatIntersection)
         {
-            Init();
+            Init(whatIntersection);
         }
 
-        private void Init()
+        private void Init(string whatIntersection)
         {
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
@@ -123,12 +123,10 @@ namespace intersectionDisection
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Intersection Disection";
-            this.FourwayIntersection();
-            this.Paint += this.Teken;
             this.ResumeLayout(false);
             this.PerformLayout();
         }
-        private void FourwayIntersection()
+        private void fourwayIntersection()
         {
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
