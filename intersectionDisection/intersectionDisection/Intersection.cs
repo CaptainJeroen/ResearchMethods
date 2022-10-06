@@ -57,6 +57,7 @@ namespace intersectionDisection
                     this.RemoveCars(this.lanes[i], carsThrough);// Als er maar 1 auto per cycle langs gaat zou Pop() wel goed werken
                 }
             }
+
             //Wachttijd voor autos die nu nog staan te wachten verhogen
             for (int i = 0; i < this.lanes.Length; i++)
             {
@@ -71,6 +72,8 @@ namespace intersectionDisection
             {
                 this.AddCars(this.lanes[i],carsIn[i]);
             }
+
+
             this.cyclesPassed++;
             this.totalCarsPassed += passed;
             this.trafficLights = trafficL.Behaviour();
