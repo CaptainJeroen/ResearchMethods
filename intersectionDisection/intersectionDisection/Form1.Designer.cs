@@ -56,7 +56,7 @@ namespace intersectionDisection
         private Label labelcyclespassednumber;
         private Label labelcycleswithoutchangenumber;
 
-        private void InitializeComponent()
+        //private void InitializeComponent()
         private ComboBox comboBox1 = new ComboBox();
 
         private void InitializeComponent(string whatIntersection)
@@ -268,6 +268,22 @@ namespace intersectionDisection
             this.labeleast = new System.Windows.Forms.Label();
             this.labelsouth = new System.Windows.Forms.Label();
             this.labelwest = new System.Windows.Forms.Label();
+            this.labelnorthwait = new System.Windows.Forms.Label();
+            this.labeleastwait = new System.Windows.Forms.Label();
+            this.labelsouthwait = new System.Windows.Forms.Label();
+            this.labelwestwait = new System.Windows.Forms.Label();
+            this.labelnorthwaitnumber = new System.Windows.Forms.Label();
+            this.labeleastwaitnumber = new System.Windows.Forms.Label();
+            this.labelsouthwaitnumber = new System.Windows.Forms.Label();
+            this.labelwestwaitnumber = new System.Windows.Forms.Label();
+            this.labeltotalcarspassed = new System.Windows.Forms.Label();
+            this.labeltotalwaittime = new System.Windows.Forms.Label();
+            this.labelcyclespassed = new System.Windows.Forms.Label();
+            this.labelcycleswithoutchange = new System.Windows.Forms.Label();
+            this.labeltotalcarspassednumber = new System.Windows.Forms.Label();
+            this.labeltotalwaittimenumber = new System.Windows.Forms.Label();
+            this.labelcyclespassednumber = new System.Windows.Forms.Label();
+            this.labelcycleswithoutchangenumber = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
