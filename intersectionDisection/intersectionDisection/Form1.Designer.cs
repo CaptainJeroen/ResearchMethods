@@ -244,6 +244,150 @@ namespace intersectionDisection
             this.labelwest.TabIndex = 7;
             this.labelwest.Text = "West: ";
             // 
+            // labelnorthwait
+            // 
+            this.labelnorthwait.AutoSize = true;
+            this.labelnorthwait.Location = new System.Drawing.Point(400, 70);
+            this.labelnorthwait.Name = "labelnorthwait";
+            this.labelnorthwait.Size = new System.Drawing.Size(35, 13);
+            this.labelnorthwait.TabIndex = 8;
+            this.labelnorthwait.Text = "WaitCycles: ";
+            // 
+            // labeleastwait
+            // 
+            this.labeleastwait.AutoSize = true;
+            this.labeleastwait.Location = new System.Drawing.Point(950, 470);
+            this.labeleastwait.Name = "labeleastwait";
+            this.labeleastwait.Size = new System.Drawing.Size(35, 13);
+            this.labeleastwait.TabIndex = 9;
+            this.labeleastwait.Text = "WaitCycles: ";
+            // 
+            // labelsouthwait
+            // 
+            this.labelsouthwait.AutoSize = true;
+            this.labelsouthwait.Location = new System.Drawing.Point(500, 970);
+            this.labelsouthwait.Name = "labelsouthwait";
+            this.labelsouthwait.Size = new System.Drawing.Size(35, 13);
+            this.labelsouthwait.TabIndex = 10;
+            this.labelsouthwait.Text = "WaitCycles: ";
+            // 
+            // labelwestwait
+            // 
+            this.labelwestwait.AutoSize = true;
+            this.labelwestwait.Location = new System.Drawing.Point(50, 570);
+            this.labelwestwait.Name = "labelwestwait";
+            this.labelwestwait.Size = new System.Drawing.Size(35, 13);
+            this.labelwestwait.TabIndex = 11;
+            this.labelwestwait.Text = "WaitCycles: ";
+            // 
+            // labelnorthwaitnumber
+            // 
+            this.labelnorthwaitnumber.AutoSize = true;
+            this.labelnorthwaitnumber.Location = new System.Drawing.Point(470, 70);
+            this.labelnorthwaitnumber.Name = "labelnorthwaitnumber";
+            this.labelnorthwaitnumber.Size = new System.Drawing.Size(35, 13);
+            this.labelnorthwaitnumber.TabIndex = 12;
+            this.labelnorthwaitnumber.Text = "0";
+            // 
+            // labeleastwaitnumber
+            // 
+            this.labeleastwaitnumber.AutoSize = true;
+            this.labeleastwaitnumber.Location = new System.Drawing.Point(1020, 470);
+            this.labeleastwaitnumber.Name = "labeleastwait";
+            this.labeleastwaitnumber.Size = new System.Drawing.Size(35, 13);
+            this.labeleastwaitnumber.TabIndex = 13;
+            this.labeleastwaitnumber.Text = "0";
+            // 
+            // labelsouthwaitnumber
+            // 
+            this.labelsouthwaitnumber.AutoSize = true;
+            this.labelsouthwaitnumber.Location = new System.Drawing.Point(570, 970);
+            this.labelsouthwaitnumber.Name = "labelsouthwait";
+            this.labelsouthwaitnumber.Size = new System.Drawing.Size(35, 13);
+            this.labelsouthwaitnumber.TabIndex = 14;
+            this.labelsouthwaitnumber.Text = "0";
+            // 
+            // labelwestwaitnumber
+            // 
+            this.labelwestwaitnumber.AutoSize = true;
+            this.labelwestwaitnumber.Location = new System.Drawing.Point(120, 570);
+            this.labelwestwaitnumber.Name = "labelwestwait";
+            this.labelwestwaitnumber.Size = new System.Drawing.Size(35, 13);
+            this.labelwestwaitnumber.TabIndex = 15;
+            this.labelwestwaitnumber.Text = "0";
+            // 
+            // labeltotalcarspassed
+            // 
+            this.labeltotalcarspassed.AutoSize = true;
+            this.labeltotalcarspassed.Location = new System.Drawing.Point(1000, 100);
+            this.labeltotalcarspassed.Name = "labeltotalcarspassed";
+            this.labeltotalcarspassed.Size = new System.Drawing.Size(35, 13);
+            this.labeltotalcarspassed.TabIndex = 16;
+            this.labeltotalcarspassed.Text = "Total Cars Passed: ";
+            // 
+            // labeltotalwaittime
+            // 
+            this.labeltotalwaittime.AutoSize = true;
+            this.labeltotalwaittime.Location = new System.Drawing.Point(1000, 130);
+            this.labeltotalwaittime.Name = "labeltotalwaittime";
+            this.labeltotalwaittime.Size = new System.Drawing.Size(35, 13);
+            this.labeltotalwaittime.TabIndex = 17;
+            this.labeltotalwaittime.Text = "Total Wait Time: ";
+            // 
+            // labelcyclespassed
+            // 
+            this.labelcyclespassed.AutoSize = true;
+            this.labelcyclespassed.Location = new System.Drawing.Point(1000, 160);
+            this.labelcyclespassed.Name = "labelcyclespassed";
+            this.labelcyclespassed.Size = new System.Drawing.Size(35, 13);
+            this.labelcyclespassed.TabIndex = 18;
+            this.labelcyclespassed.Text = "Cycles Passed: ";
+            // 
+            // labelcycleswithoutchange
+            // 
+            this.labelcycleswithoutchange.AutoSize = true;
+            this.labelcycleswithoutchange.Location = new System.Drawing.Point(1000, 190);
+            this.labelcycleswithoutchange.Name = "labelcycleswithoutchange";
+            this.labelcycleswithoutchange.Size = new System.Drawing.Size(35, 13);
+            this.labelcycleswithoutchange.TabIndex = 19;
+            this.labelcycleswithoutchange.Text = "Cycles Without Change: ";
+            // 
+            // labeltotalcarspassednumber
+            // 
+            this.labeltotalcarspassednumber.AutoSize = true;
+            this.labeltotalcarspassednumber.Location = new System.Drawing.Point(1150, 100);
+            this.labeltotalcarspassednumber.Name = "labeltotalcarspassednumber";
+            this.labeltotalcarspassednumber.Size = new System.Drawing.Size(35, 13);
+            this.labeltotalcarspassednumber.TabIndex = 20;
+            this.labeltotalcarspassednumber.Text = "0";
+            // 
+            // labeltotalwaittimenumber
+            // 
+            this.labeltotalwaittimenumber.AutoSize = true;
+            this.labeltotalwaittimenumber.Location = new System.Drawing.Point(1150, 130);
+            this.labeltotalwaittimenumber.Name = "labeltotalwaittimenumber";
+            this.labeltotalwaittimenumber.Size = new System.Drawing.Size(35, 13);
+            this.labeltotalwaittimenumber.TabIndex = 21;
+            this.labeltotalwaittimenumber.Text = "0";
+            // 
+            // labelcyclespassednumber
+            // 
+            this.labelcyclespassednumber.AutoSize = true;
+            this.labelcyclespassednumber.Location = new System.Drawing.Point(1150, 160);
+            this.labelcyclespassednumber.Name = "labelcyclespassednumber";
+            this.labelcyclespassednumber.Size = new System.Drawing.Size(35, 13);
+            this.labelcyclespassednumber.TabIndex = 22;
+            this.labelcyclespassednumber.Text = "0";
+            // 
+            // labelcycleswithoutchangenumber
+            // 
+            this.labelcycleswithoutchangenumber.AutoSize = true;
+            this.labelcycleswithoutchangenumber.Location = new System.Drawing.Point(1150, 190);
+            this.labelcycleswithoutchangenumber.Name = "labelcycleswithoutchangenumber";
+            this.labelcycleswithoutchangenumber.Size = new System.Drawing.Size(35, 13);
+            this.labelcycleswithoutchangenumber.TabIndex = 23;
+            this.labelcycleswithoutchangenumber.Text = "0";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -256,6 +400,31 @@ namespace intersectionDisection
             this.Controls.Add(this.labeleast);
             this.Controls.Add(this.labelsouth);
             this.Controls.Add(this.labelwest);
+            this.Controls.Add(this.labelnorthwait);
+            this.Controls.Add(this.labeleastwait);
+            this.Controls.Add(this.labelsouthwait);
+            this.Controls.Add(this.labelwestwait);
+            this.Controls.Add(this.labelnorthwaitnumber);
+            this.Controls.Add(this.labeleastwaitnumber);
+            this.Controls.Add(this.labelsouthwaitnumber);
+            this.Controls.Add(this.labelwestwaitnumber);
+            this.Controls.Add(this.labeltotalcarspassed);
+            this.Controls.Add(this.labeltotalwaittime);
+            this.Controls.Add(this.labelcyclespassed);
+            this.Controls.Add(this.labelcycleswithoutchange);
+            this.Controls.Add(this.labeltotalcarspassednumber);
+            this.Controls.Add(this.labeltotalwaittimenumber);
+            this.Controls.Add(this.labelcyclespassednumber);
+            this.Controls.Add(this.labelcycleswithoutchangenumber);
+
+            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Name = "Form1";
+            this.Text = "Intersection Disection";
+            this.Paint += this.TekenFourWay;
+            //this.Shown += StartSimulation;
+            //this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
         }
 
         private void fourwayWithLeftLane()
@@ -534,7 +703,7 @@ namespace intersectionDisection
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Intersection Disection";
-            this.Paint += this.TekenFourWay;
+            this.Paint += this.TekenFourWayWithLeftLane;
             //this.Shown += StartSimulation;
             //this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
