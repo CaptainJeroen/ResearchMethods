@@ -54,7 +54,7 @@ namespace intersectionDisection
 
         private void UpdateLabels()
         {
-            delUpdateTextBox1 delUpdateTextBox1 = new delUpdateTextBox1(UpdateOtherLabels);
+            delUpdateTextBox delUpdateTextBox1 = new delUpdateTextBox(UpdateOtherLabels);
             this.labelnorthwaitnumber.BeginInvoke(delUpdateTextBox1, "");
         }
 
@@ -205,7 +205,7 @@ namespace intersectionDisection
 
 
 
-    private void AsyncUpdate()
+    private void UpdateLaneCount()
         {
             delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
             string str = MakeString();
@@ -220,7 +220,7 @@ namespace intersectionDisection
             this.label4.Text = str[3];
         }
 
-        void TekenFourWay(object obj, PaintEventArgs pea)
+        //void TekenFourWay(object obj, PaintEventArgs pea)
         private void UpdateOtherLabels(string text)
         {
             this.labelnorthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
@@ -241,7 +241,7 @@ namespace intersectionDisection
             }
             return res;
         }
-        void Teken(object obj, PaintEventArgs pea)
+        void TekenFourWay(object obj, PaintEventArgs pea)
         {
             Graphics gr = pea.Graphics;
             Brush hor = this.intersection.trafficLights[0] ? Brushes.Green : Brushes.Red;

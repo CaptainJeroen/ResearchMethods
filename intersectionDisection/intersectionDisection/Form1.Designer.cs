@@ -518,7 +518,7 @@ namespace intersectionDisection
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form1";
             this.Text = "Intersection Disection";
-            this.Paint += this.Teken;
+            this.Paint += this.TekenFourWay;
             //this.Shown += StartSimulation;
             //this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
