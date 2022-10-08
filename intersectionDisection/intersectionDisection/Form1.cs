@@ -52,11 +52,6 @@ namespace intersectionDisection
             UpdateChart();
         }
 
-        private void UpdateLabels()
-        {
-            delUpdateTextBox delUpdateTextBox1 = new delUpdateTextBox(UpdateOtherLabels);
-            this.labelnorthwaitnumber.BeginInvoke(delUpdateTextBox1, "");
-        }
 
         //SD = Standard diviation
         private void CalculateSDAndMean(List<int> waitingTimes)
@@ -203,14 +198,19 @@ namespace intersectionDisection
         }
 
 
-
-
-    private void UpdateLaneCount()
+        private void UpdateLaneCount()
         {
             delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
             string str = MakeString();
             this.label1.BeginInvoke(delUpdateTextBox, str);
         }
+
+        private void UpdateLabels()
+        {
+            delUpdateTextBox delUpdateTextBox1 = new delUpdateTextBox(UpdateOtherLabels);
+            this.labelnorthwaitnumber.BeginInvoke(delUpdateTextBox1, "");
+        }
+
         private void UpdateLabel1(string text)
         {
             string[] str = text.Split('|');
@@ -220,7 +220,6 @@ namespace intersectionDisection
             this.label4.Text = str[3];
         }
 
-        //void TekenFourWay(object obj, PaintEventArgs pea)
         private void UpdateOtherLabels(string text)
         {
             this.labelnorthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
