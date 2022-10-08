@@ -202,7 +202,7 @@ namespace intersectionDisection
         {
             delUpdateTextBox delUpdateTextBox = new delUpdateTextBox(UpdateLabel1);
             string str = MakeString();
-            this.label1.BeginInvoke(delUpdateTextBox, str);
+            this.labelnorthnumber.BeginInvoke(delUpdateTextBox, str);
         }
 
         private void UpdateLabels()
@@ -214,22 +214,40 @@ namespace intersectionDisection
         private void UpdateLabel1(string text)
         {
             string[] str = text.Split('|');
-            this.label1.Text = str[0];
-            this.label2.Text = str[1];
-            this.label3.Text = str[2];
-            this.label4.Text = str[3];
+            this.labelnorthnumber.Text = str[0];
+            this.labeleastnumber.Text = str[1];
+            this.labelsouthnumber.Text = str[2];
+            this.labelwestnumber.Text = str[3];
+
+            if (whatInt == "fourwayWithLeftLane")
+            {
+                this.labelnorthnumber2.Text = str[4];
+                this.labeleastnumber2.Text = str[5];
+                this.labelsouthnumber2.Text = str[6];
+                this.labelwestnumber2.Text = str[7];
+            }
+                
         }
 
         private void UpdateOtherLabels(string text)
         {
-            this.labelnorthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
-            this.labeleastwaitnumber.Text   = GetTotalWaitingTimeLane(this.intersection.lanes[1]).ToString();
-            this.labelsouthwaitnumber.Text  = GetTotalWaitingTimeLane(this.intersection.lanes[2]).ToString();
-            this.labelwestwaitnumber.Text   = GetTotalWaitingTimeLane(this.intersection.lanes[3]).ToString();
-            this.labeltotalcarspassednumber.Text        = this.intersection.totalCarsPassed.ToString();
-            this.labeltotalwaittimenumber.Text          = this.intersection.totalWaitTime.ToString();
-            this.labelcyclespassednumber.Text           = this.intersection.cyclesPassed.ToString();
-            this.labelcycleswithoutchangenumber.Text    = this.intersection.cyclesWithoutChange.ToString();
+            this.labelnorthwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
+            this.labeleastwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[1]).ToString();
+            this.labelsouthwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[2]).ToString();
+            this.labelwestwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[3]).ToString();
+
+            this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
+            this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
+            this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
+            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.cyclesWithoutChange.ToString();
+
+            if (whatInt == "fourwayWithLeftLane")
+            {
+               this.labelnorthwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[4]).ToString();
+                this.labeleastwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[5]).ToString();
+                this.labelsouthwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[6]).ToString();
+                this.labelwestwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[7]).ToString();
+            }
         }
         private int GetTotalWaitingTimeLane(List<Car> lane)
         {
