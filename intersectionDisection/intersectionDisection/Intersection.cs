@@ -55,9 +55,8 @@ namespace intersectionDisection
             }
             var newLights = this.trafficL.Behaviour();
 
-            if (newLights[0]) 
-                ;
-                if (!Enumerable.SequenceEqual(newLights, trafficLights))
+
+            if (!Enumerable.SequenceEqual(newLights, trafficLights))
             {
                 switchedTrafficLight++;
                 //Add waiting time of x to everyone
@@ -216,12 +215,20 @@ namespace intersectionDisection
                     scores[i] = intersection.lanes[i].Count();
                 }
 
-                List<(double, int)> means = new List<(double, int)> { (scores[0] + scores[4], 0), (scores[1] + scores[5], 1), (scores[2] + scores[6], 2), (scores[3] + scores[7], 3) };
+                List<(double, (int,int))> means = new List<(double, (int, int))> { 
+                    (scores[0] + scores[4], (0,4)),
+                    (scores[1] + scores[5], (1,5)), 
+                    (scores[2] + scores[6], (2,6)), 
+                    (scores[3] + scores[7], (3,7)),
+                    (scores[0] + scores[1], (0,1)), 
+                    (scores[2] + scores[3], (2,3)), 
+                    (scores[4] + scores[5], (4,5)), 
+                    (scores[6] + scores[7], (6,7))};
 
                 means.Sort((x, y) => y.Item1.CompareTo(x.Item1));
 
-                newTrafficLights[means[0].Item2] = true;
-                newTrafficLights[means[0].Item2 + 4] = true;
+                newTrafficLights[means[0].Item2.Item1] = true;
+                newTrafficLights[means[0].Item2.Item2] = true;
             }
 
 
