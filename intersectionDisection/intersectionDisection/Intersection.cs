@@ -112,12 +112,14 @@ namespace intersectionDisection
     {
         double fairness, throughput;
         public Intersection intersection;
+        public int[] cyclesWithoutChange;
 
-        public TrafficLights(double fr, double thrP, Intersection i)
+        public TrafficLights(double fr, double thrP, Intersection i,int l)
         {
             fairness = fr;
             throughput = thrP;
             intersection = i;
+            cyclesWithoutChange = new int[l]; 
         }
 
         public bool[] Behaviour()
@@ -160,7 +162,7 @@ namespace intersectionDisection
             double[] scores = new double[intersection.lanes.Length];
             for (int i = 0; i < intersection.lanes.Length; i++)
             {
-                scores[i] = CalcScores(intersection.lanes[i].Count(), i);
+                scores[i] = CalcScores(intersection.lanes[i].Count(), this.cyclesWithoutChange[i]);
             }
 
             List<(double, int)> means = new List<(double,int)> { (scores[0] + scores[4], 0), (scores[1] + scores[5], 1), (scores[2] + scores[6], 2), (scores[3] + scores[7], 3) };
@@ -172,7 +174,8 @@ namespace intersectionDisection
             newTrafficLights[means[0].Item2] = true;
             newTrafficLights[means[0].Item2 + 4] = true;
 
-            this.CompairTrafficLights(newTrafficLights, this.intersection.trafficLights);
+            //this.CompairTrafficLights(newTrafficLights, this.intersection.trafficLights);
+            this.UpdateCyclesWithoutChange(newTrafficLights);
 
             return newTrafficLights;
         }
@@ -184,9 +187,25 @@ namespace intersectionDisection
             else
                 this.intersection.cyclesWithoutChange = 0;
         }
-        private double CalcScores(int cars, int laneIndex)
+        
+        private void UpdateCyclesWithoutChange(bool[] lights)
         {
-            return cars * throughput / Math.Pow(fairness , intersection.cyclesWithoutChange);  
+            for (int i = 0; i < this.cyclesWithoutChange.Length; i++)
+            {
+                if (lights[i])
+                {
+                    cyclesWithoutChange[i] = 0;
+                }
+                else
+                {
+                    cyclesWithoutChange[i]++;
+                }
+            }
+        }
+
+        private double CalcScores(int cars, int cyclesWithoutChange)
+        {
+            return cars * throughput / Math.Pow(fairness , -cyclesWithoutChange);  
         }
     }
 }
