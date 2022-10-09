@@ -13,14 +13,14 @@ namespace intersectionDisection
         public List<Car>[] lanes; // north, east, south, west
         public bool[] trafficLights; // north, east, south, west
         public int totalCarsPassed;
-        public float totalWaitTime = 0;
-        public int cyclesPassed = 0;
+        public int totalWaitTime = 0; //totale wachttijd van auto's die er voorbij zijn
+        public int cyclesPassed = 0; 
         public int cyclesWithoutChange = 1;
         private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
-        public List<float> waitingTimes = new List<float>();
-
+        public List<int> waitingTimes = new List<int>(); // wachtijden van alle auto's voordat ze door konden rijden
+        public List<int[]> carsInLane = new List<int[]>(); // hoeveel auto's in lanes van alle rondes
 
         public Intersection( int[] ci, int ct, TrafficLights tl, int l = 4)// l = 4 of 8 of 12 niks anders
         {
@@ -44,11 +44,13 @@ namespace intersectionDisection
         public void Model()//Manier bedenken om de gemiddelde wachttijd te berekenen, misschien toch auto's als structs
         {
             int passed = 0;
-
+            int[] currentLanes = new int[this.lanes.Length]; 
             //Elke cycle komen er bij elke baan auto's bij
             for (int i = 0; i < this.lanes.Length; i++)
             {
                 this.AddCars(this.lanes[i], carsIn[i]);
+                 currentLanes[i] = this.lanes[i].Count;
+
             }
 
             var newLights = this.trafficL.Behaviour();
@@ -86,6 +88,7 @@ namespace intersectionDisection
                 }
             }
 
+   
             this.cyclesPassed++;
             this.totalCarsPassed += passed;
 
