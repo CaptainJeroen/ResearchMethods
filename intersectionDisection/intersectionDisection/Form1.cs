@@ -112,14 +112,14 @@ namespace intersectionDisection
         }
 
 
-        private int[] CountOccurrencesWaitTime(List<int> waitingTimes)
+        private int[] CountOccurrencesWaitTime(List<float> waitingTimes)
         {
             //Make frequency table
-            int maxValue = waitingTimes.Max();
-            int[] frequencyArray = new int[maxValue + 1];
+            float maxValue = waitingTimes.Max();
+            int[] frequencyArray = new int[(int)Math.Round(maxValue) + 1];
             for(int i = 0; i<= waitingTimes.Count() -1; i++)
             {
-                frequencyArray[waitingTimes[i]]++;
+                frequencyArray[(int)Math.Round(waitingTimes[i])]++;
             }
             return frequencyArray;
 
@@ -163,7 +163,7 @@ namespace intersectionDisection
         private int[] CountOccurrencesWaitTime2()
         {
             int totalWaitingCars = 0;
-            int maxValue = 0;
+            float maxValue = 0;
             for (int i = 0; i < this.intersection.lanes.Length; i++)
             {
                 totalWaitingCars += this.intersection.lanes[i].Count();
@@ -173,12 +173,12 @@ namespace intersectionDisection
                         maxValue = this.intersection.lanes[i][j].waitingTime;
                 }
             }
-            int[] frequencyArray = new int[maxValue +1];
+            int[] frequencyArray = new int[(int)Math.Round(maxValue)];
             for (int i = 0; i < this.intersection.lanes.Length; i++)
             {
                 for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
                 {
-                    frequencyArray[this.intersection.lanes[i][j].waitingTime]++;
+                    frequencyArray[(int)Math.Round(this.intersection.lanes[i][j].waitingTime)]++;
                 }
             }
 
@@ -250,9 +250,9 @@ namespace intersectionDisection
                 this.labelwestwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[7]).ToString();
             }
         }
-        private int GetTotalWaitingTimeLane(List<Car> lane)
+        private float GetTotalWaitingTimeLane(List<Car> lane)
         {
-            int res = 0;
+            float res = 0;
             for (int i = 0; i < lane.Count; i++)
             {
                 res += lane[i].waitingTime;
