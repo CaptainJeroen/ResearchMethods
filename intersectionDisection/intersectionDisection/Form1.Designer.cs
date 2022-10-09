@@ -128,13 +128,13 @@ namespace intersectionDisection
             this.labeltotalcarspassed.Text = "Total Cars Passed: ";
             this.labeltotalwaittime = new System.Windows.Forms.Label();
             this.labeltotalwaittime.Name = "labeltotalwaittime";
-            this.labeltotalwaittime.Text = "Total Wait Time: ";
+            this.labeltotalwaittime.Text = "Total Wait Time of cars that passed: ";
             this.labeltotalcyclespassed = new System.Windows.Forms.Label();
             this.labeltotalcyclespassed.Name = "labeltotalcyclespassed";
             this.labeltotalcyclespassed.Text = "Total Cycles Passed: ";
             this.labeltotalcycleswithoutchange = new System.Windows.Forms.Label();
             this.labeltotalcycleswithoutchange.Name = "labeltotalcycleswithoutchange";
-            this.labeltotalcycleswithoutchange.Text = "Total Cycles Without Change: ";
+            this.labeltotalcycleswithoutchange.Text = "Total trafficlight switches: ";
             this.labeltotalcarspassednumber = new System.Windows.Forms.Label();
             this.labeltotalcarspassednumber.Name = "labeltotalcarspassednumber";
             this.labeltotalwaittimenumber = new System.Windows.Forms.Label();

@@ -29,8 +29,10 @@ namespace intersectionDisection
 
         public Form1()
         {
-            this.trafficLights = new TrafficLights(1.1, 3, this.intersection);
-            this.intersection = new Intersection(new int[] { 4, 3, 4, 1, 5, 2, 7, 3 }, 10, this.trafficLights, 8);
+            int lanes = 8;
+            this.trafficLights = new TrafficLights( 10,this.intersection,lanes);
+            this.intersection = new Intersection(new int[] { 0, 0, 0, 10, 0, 0, 0, 10 }, 10, this.trafficLights, lanes);
+                                                        
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent(whatInt);
@@ -42,13 +44,13 @@ namespace intersectionDisection
 
         public void StartSimulation()
         {
-            while (intersection.cyclesPassed<=100)
+            while (intersection.cyclesPassed<=1000)
             {
                 this.intersection.Model();
                 this.UpdateLaneCount();
                 //this.UpdateLabels();
                 this.Invalidate();
-                Thread.Sleep(10);
+                Thread.Sleep(1);
             }
             UpdateChart();
             WriteToFile();
@@ -142,14 +144,14 @@ namespace intersectionDisection
         }
 
 
-        private int[] CountOccurrencesWaitTime(List<int> waitingTimes)
+        private int[] CountOccurrencesWaitTime(List<float> waitingTimes)
         {
             //Make frequency table
-            int maxValue = waitingTimes.Max();
-            int[] frequencyArray = new int[maxValue + 1];
+            float maxValue = waitingTimes.Max();
+            int[] frequencyArray = new int[(int)Math.Round(maxValue) + 1];
             for(int i = 0; i<= waitingTimes.Count() -1; i++)
             {
-                frequencyArray[waitingTimes[i]]++;
+                frequencyArray[(int)Math.Round(waitingTimes[i])]++;
             }
             return frequencyArray;
 
@@ -192,7 +194,7 @@ namespace intersectionDisection
         private int[] CountOccurrencesWaitTime2()
         {
             int totalWaitingCars = 0;
-            int maxValue = 0;
+            float maxValue = 0;
             for (int i = 0; i < this.intersection.lanes.Length; i++)
             {
                 totalWaitingCars += this.intersection.lanes[i].Count();
@@ -202,12 +204,12 @@ namespace intersectionDisection
                         maxValue = this.intersection.lanes[i][j].waitingTime;
                 }
             }
-            int[] frequencyArray = new int[maxValue +1];
+            int[] frequencyArray = new int[(int)Math.Round(maxValue) +1];
             for (int i = 0; i < this.intersection.lanes.Length; i++)
             {
                 for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
                 {
-                    frequencyArray[this.intersection.lanes[i][j].waitingTime]++;
+                    frequencyArray[(int)Math.Round(this.intersection.lanes[i][j].waitingTime)]++;
                 }
             }
 
@@ -280,7 +282,7 @@ namespace intersectionDisection
             this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
             this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
             this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
-            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.cyclesWithoutChange.ToString();
+            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.switchedTrafficLight.ToString();
         }
 
         private void UpdateOtherLabels(string text)
@@ -293,7 +295,7 @@ namespace intersectionDisection
             this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
             this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
             this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
-            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.cyclesWithoutChange.ToString();
+            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.switchedTrafficLight.ToString();
 
             if (whatInt == "fourwayWithLeftLane")
             {
@@ -303,9 +305,9 @@ namespace intersectionDisection
                 this.labelwestwaitnumber2.Text = GetTotalWaitingTimeLane(this.intersection.lanes[7]).ToString();
             }
         }
-        private int GetTotalWaitingTimeLane(List<Car> lane)
+        private float GetTotalWaitingTimeLane(List<Car> lane)
         {
-            int res = 0;
+            float res = 0;
             for (int i = 0; i < lane.Count; i++)
             {
                 res += lane[i].waitingTime;
