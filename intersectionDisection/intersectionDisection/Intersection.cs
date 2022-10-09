@@ -114,7 +114,7 @@ namespace intersectionDisection
         public Intersection intersection;
         public int[] cyclesWithoutChange;
 
-        public TrafficLights(double fr, double thrP, Intersection i,int l)
+        public TrafficLights(double fr, double thrP, int maxCyclesWithoutGreen, Intersection i,int l)
         {
             fairness = fr;
             throughput = thrP;

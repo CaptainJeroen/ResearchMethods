@@ -27,7 +27,7 @@ namespace intersectionDisection
         public Form1()
         {
             int lanes = 8;
-            this.trafficLights = new TrafficLights(1, 3, this.intersection,lanes);
+            this.trafficLights = new TrafficLights(1, 3, 10,this.intersection,lanes);
             this.intersection = new Intersection(new int[] { 10, 1, 1, 1, 10, 1, 1, 1 }, 10, this.trafficLights, lanes);
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
