@@ -30,8 +30,9 @@ namespace intersectionDisection
         public Form1()
         {
             int lanes = 8;
-            this.trafficLights = new TrafficLights( 2,this.intersection,lanes);
-            this.intersection = new Intersection(new int[] { 4, 3, 1, 3, 7, 3, 2, 3 }, 2, this.trafficLights, lanes);
+            this.trafficLights = new TrafficLights( 10,this.intersection,lanes);
+            this.intersection = new Intersection(new int[] { 0, 0, 0, 10, 0, 0, 0, 10 }, 10, this.trafficLights, lanes);
+                                                        
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent(whatInt);
@@ -43,13 +44,13 @@ namespace intersectionDisection
 
         public void StartSimulation()
         {
-            while (intersection.cyclesPassed<=100)
+            while (intersection.cyclesPassed<=1000)
             {
                 this.intersection.Model();
                 this.UpdateLaneCount();
                 //this.UpdateLabels();
                 this.Invalidate();
-                Thread.Sleep(10);
+                Thread.Sleep(1);
             }
             UpdateChart();
             WriteToFile();
@@ -281,7 +282,7 @@ namespace intersectionDisection
             this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
             this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
             this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
-            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.cyclesWithoutChange.ToString();
+            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.switchedTrafficLight.ToString();
         }
 
         private void UpdateOtherLabels(string text)
@@ -294,7 +295,7 @@ namespace intersectionDisection
             this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
             this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
             this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
-            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.cyclesWithoutChange.ToString();
+            this.labeltotalcycleswithoutchangenumber.Text = this.intersection.switchedTrafficLight.ToString();
 
             if (whatInt == "fourwayWithLeftLane")
             {

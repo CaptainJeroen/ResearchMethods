@@ -19,7 +19,7 @@ namespace intersectionDisection
         private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
-        int switchedTrafficLight = 0;
+        public int switchedTrafficLight = 0;
         public List<float> waitingTimes = new List<float>(); // wachtijden van alle auto's voordat ze door konden rijden
         public List<int[]> carsInLane = new List<int[]>(); // hoeveel auto's in lanes van alle rondes
 
@@ -53,9 +53,11 @@ namespace intersectionDisection
                  currentLanes[i] = this.lanes[i].Count;
 
             }
-
             var newLights = this.trafficL.Behaviour();
-            if (!Enumerable.SequenceEqual(newLights, trafficLights))
+
+            if (newLights[0]) 
+                ;
+                if (!Enumerable.SequenceEqual(newLights, trafficLights))
             {
                 switchedTrafficLight++;
                 //Add waiting time of x to everyone
