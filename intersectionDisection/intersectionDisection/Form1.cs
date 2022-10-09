@@ -19,6 +19,13 @@ namespace intersectionDisection
         public TrafficLights trafficLights;
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
+
+        private string fileName = "test";
+        private int maxWOGreen = 5;
+        private int[] carsIn = new int[] { };
+        private int carsThrough = 10;
+
+
         public delegate void delUpdateTextBox(string text);
         //public delegate void delUpdateTextBox1(string text);
         public delegate void delUpdateChart();
@@ -30,8 +37,8 @@ namespace intersectionDisection
         public Form1()
         {
             int lanes = 8;
-            this.trafficLights = new TrafficLights( 10,this.intersection,lanes);
-            this.intersection = new Intersection(new int[] { 0, 0, 0, 10, 0, 0, 0, 10 }, 10, this.trafficLights, lanes);
+            this.trafficLights = new TrafficLights(this.maxWOGreen, this.intersection, lanes);
+            this.intersection = new Intersection(this.carsIn, this.carsThrough, this.trafficLights, lanes);
                                                         
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
@@ -44,7 +51,7 @@ namespace intersectionDisection
 
         public void StartSimulation()
         {
-            while (intersection.cyclesPassed<=1000)
+            while (intersection.cyclesPassed<=100)
             {
                 this.intersection.Model();
                 this.UpdateLaneCount();
@@ -79,12 +86,15 @@ namespace intersectionDisection
         {
             DateTime currentDateTime = DateTime.Now;
             string curpath = Directory.GetCurrentDirectory();
-            string path = Path.GetFullPath(Path.Combine(curpath, @"..\..\..\..\")) + "simulationData\\" + whatInt + currentDateTime.ToString("dd-MM-yyyy-HH-mm-ss") + ".txt";
+            string path = Path.GetFullPath(Path.Combine(curpath, @"..\..\..\..\")) + "simulationData\\" + this.fileName + ".txt";
             int[] waitingTimeCarsGone = CountOccurrencesWaitTime(this.intersection.waitingTimes);
             int[] waitingTimeCarsLeft = CountOccurrencesWaitTime2();
 
             using (StreamWriter sw = File.CreateText(path))
             {
+                sw.WriteLine(maxWOGreen);
+                sw.WriteLine(string.Join(" ", carsIn));
+                sw.WriteLine(carsThrough);
                 sw.WriteLine("carsInLane");
                 this.intersection.carsInLane.ForEach(e =>
                 {
@@ -280,7 +290,7 @@ namespace intersectionDisection
                     break;
             }
             this.labeltotalcarspassednumber.Text = this.intersection.totalCarsPassed.ToString();
-            this.labeltotalwaittimenumber.Text = this.intersection.totalWaitTime.ToString();
+            this.labeltotalwaittimenumber.Text = (this.intersection.totalWaitTime * (carsThrough / 10)).ToString();
             this.labeltotalcyclespassednumber.Text = this.intersection.cyclesPassed.ToString();
             this.labeltotalcycleswithoutchangenumber.Text = this.intersection.switchedTrafficLight.ToString();
         }
