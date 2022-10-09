@@ -30,8 +30,8 @@ namespace intersectionDisection
         public Form1()
         {
             int lanes = 8;
-            this.trafficLights = new TrafficLights( 20,this.intersection,lanes);
-            this.intersection = new Intersection(new int[] { 10, 9, 10, 0, 0, 0, 0, 0 }, 6, this.trafficLights, lanes);
+            this.trafficLights = new TrafficLights( 6,this.intersection,lanes);
+            this.intersection = new Intersection(new int[] { 6, 1, 4, 2, 1, 3, 1, 1 }, 120, this.trafficLights, lanes);
                                                         
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
@@ -44,7 +44,7 @@ namespace intersectionDisection
 
         public void StartSimulation()
         {
-            while (intersection.cyclesPassed<=10)
+            while (intersection.cyclesPassed<=50)
             {
                 this.intersection.Model();
                 this.UpdateLaneCount();
