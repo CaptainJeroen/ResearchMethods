@@ -13,13 +13,14 @@ namespace intersectionDisection
         public List<Car>[] lanes; // north, east, south, west
         public bool[] trafficLights; // north, east, south, west
         public int totalCarsPassed;
-        public int totalWaitTime = 0; //totale wachttijd van auto's die er voorbij zijn
+        public float totalWaitTime = 0; //totale wachttijd van auto's die er voorbij zijn
         public int cyclesPassed = 0; 
         public int cyclesWithoutChange = 1;
         private int[] carsIn;
         private int carsThrough;
         TrafficLights trafficL;
-        public List<int> waitingTimes = new List<int>(); // wachtijden van alle auto's voordat ze door konden rijden
+        int switchedTrafficLight = 0;
+        public List<float> waitingTimes = new List<float>(); // wachtijden van alle auto's voordat ze door konden rijden
         public List<int[]> carsInLane = new List<int[]>(); // hoeveel auto's in lanes van alle rondes
 
         public Intersection( int[] ci, int ct, TrafficLights tl, int l = 4)// l = 4 of 8 of 12 niks anders
@@ -56,6 +57,7 @@ namespace intersectionDisection
             var newLights = this.trafficL.Behaviour();
             if (!Enumerable.SequenceEqual(newLights, trafficLights))
             {
+                switchedTrafficLight++;
                 //Add waiting time of x to everyone
                 for (int i = 0; i < this.lanes.Length; i++)
                 {
@@ -88,7 +90,7 @@ namespace intersectionDisection
                 }
             }
 
-   
+            this.carsInLane.Add(currentLanes);
             this.cyclesPassed++;
             this.totalCarsPassed += passed;
 
@@ -132,10 +134,9 @@ namespace intersectionDisection
         int maxCyclesWithoutGreen;
         public int[] cyclesWithoutChange;
 
-        public TrafficLights(double fr, double thrP,int max, Intersection i,int l)
+        public TrafficLights(int max, Intersection i,int l)
         {
-            fairness = fr;
-            throughput = thrP;
+
             maxCyclesWithoutGreen = max;
             intersection = i;
             cyclesWithoutChange = new int[l]; 
@@ -191,7 +192,7 @@ namespace intersectionDisection
             for (int i = 0; i < cyclesWithoutChange.Length; i++)
             {
                 if (cyclesWithoutChange[i] >= maxCyclesWithoutGreen)
-                    return 1;
+                    return i;
             }
             return -1;
         }

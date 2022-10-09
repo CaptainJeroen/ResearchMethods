@@ -30,8 +30,8 @@ namespace intersectionDisection
         public Form1()
         {
             int lanes = 8;
-            this.trafficLights = new TrafficLights(1, 3, 10,this.intersection,lanes);
-            this.intersection = new Intersection(new int[] { 10, 1, 1, 1, 10, 1, 1, 1 }, 10, this.trafficLights, lanes);
+            this.trafficLights = new TrafficLights( 2,this.intersection,lanes);
+            this.intersection = new Intersection(new int[] { 4, 3, 1, 3, 7, 3, 2, 3 }, 2, this.trafficLights, lanes);
             //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
             this.trafficLights.intersection = this.intersection;
             this.InitializeComponent(whatInt);
@@ -203,7 +203,7 @@ namespace intersectionDisection
                         maxValue = this.intersection.lanes[i][j].waitingTime;
                 }
             }
-            int[] frequencyArray = new int[(int)Math.Round(maxValue)];
+            int[] frequencyArray = new int[(int)Math.Round(maxValue) +1];
             for (int i = 0; i < this.intersection.lanes.Length; i++)
             {
                 for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
