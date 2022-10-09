@@ -31,14 +31,47 @@ namespace intersectionDisection
         /// the contents of this method with the code editor.
         /// </summary>
         /// 
-        private Label label1;
-        private Label label2;
-        private Label label3;
-        private Label label4;
+
+        //Standard labels
         private Label labelnorth;
         private Label labeleast;
         private Label labelsouth;
         private Label labelwest;
+        private Label labelnorthnumber;
+        private Label labeleastnumber;
+        private Label labelsouthnumber;
+        private Label labelwestnumber;
+
+        private Label labelnorthwait;
+        private Label labeleastwait;
+        private Label labelsouthwait;
+        private Label labelwestwait;
+        private Label labelnorthwaitnumber;
+        private Label labeleastwaitnumber;
+        private Label labelsouthwaitnumber;
+        private Label labelwestwaitnumber;
+
+        private Label labeltotalcarspassed;
+        private Label labeltotalwaittime;
+        private Label labeltotalcyclespassed;
+        private Label labeltotalcycleswithoutchange;
+        private Label labeltotalcarspassednumber;
+        private Label labeltotalwaittimenumber;
+        private Label labeltotalcyclespassednumber;
+        private Label labeltotalcycleswithoutchangenumber;
+
+        //Only needed for extra left lanes intersection
+        private Label labelnorthnumber2;
+        private Label labeleastnumber2;
+        private Label labelsouthnumber2;
+        private Label labelwestnumber2;
+        private Label labelnorthwaitnumber2;
+        private Label labeleastwaitnumber2;
+        private Label labelsouthwaitnumber2;
+        private Label labelwestwaitnumber2;
+
+
+        //private void InitializeComponent()
         private ComboBox comboBox1 = new ComboBox();
 
         private void InitializeComponent(string whatIntersection)
@@ -48,6 +81,95 @@ namespace intersectionDisection
 
         private void Init(string whatIntersection)
         {
+            this.labelnorth = new System.Windows.Forms.Label();
+            this.labelnorth.Name = "labelnorth";
+            this.labelnorth.Text = "North: ";
+            this.labeleast = new System.Windows.Forms.Label();
+            this.labeleast.Name = "labeleast";
+            this.labeleast.Text = "East: ";
+            this.labelsouth = new System.Windows.Forms.Label();
+            this.labelsouth.Name = "labelsouth";
+            this.labelsouth.Text = "South: ";
+            this.labelwest = new System.Windows.Forms.Label();
+            this.labelwest.Name = "labelwest";
+            this.labelwest.Text = "West: ";
+            this.labelnorthnumber = new System.Windows.Forms.Label();
+            this.labelnorthnumber.Name = "labelnorthnumber";
+            this.labeleastnumber = new System.Windows.Forms.Label();
+            this.labeleastnumber.Name = "labeleastnumber";
+            this.labelsouthnumber = new System.Windows.Forms.Label();
+            this.labelsouthnumber.Name = "labelsouthnumber";
+            this.labelwestnumber = new System.Windows.Forms.Label();
+            this.labelwestnumber.Name = "labelwestnumber";
+
+            this.labelnorthwait = new System.Windows.Forms.Label();
+            this.labelnorthwait.Name = "labelnorthwait";
+            this.labelnorthwait.Text = "WaitCyles";
+            this.labeleastwait = new System.Windows.Forms.Label();
+            this.labeleastwait.Name = "labeleastwait";
+            this.labeleastwait.Text = "WaitCyles";
+            this.labelsouthwait = new System.Windows.Forms.Label();
+            this.labelsouthwait.Name = "labelsouthwait";
+            this.labelsouthwait.Text = "WaitCyles";
+            this.labelwestwait = new System.Windows.Forms.Label();
+            this.labelwestwait.Name = "labelwestwait";
+            this.labelwestwait.Text = "WaitCyles";
+            this.labelnorthwaitnumber = new System.Windows.Forms.Label();
+            this.labelnorthwaitnumber.Name = "labelnorthwaitnumber";
+            this.labeleastwaitnumber = new System.Windows.Forms.Label();
+            this.labeleastwaitnumber.Name = "labeleastwaitnumber";
+            this.labelsouthwaitnumber = new System.Windows.Forms.Label();
+            this.labelsouthwaitnumber.Name = "labelsouthwaitnumber";
+            this.labelwestwaitnumber = new System.Windows.Forms.Label();
+            this.labelwestwaitnumber.Name = "labelwestwaitnumber";
+
+            this.labeltotalcarspassed = new System.Windows.Forms.Label();
+            this.labeltotalcarspassed.Name = "labeltotalcarspassed";
+            this.labeltotalcarspassed.Text = "Total Cars Passed: ";
+            this.labeltotalwaittime = new System.Windows.Forms.Label();
+            this.labeltotalwaittime.Name = "labeltotalwaittime";
+            this.labeltotalwaittime.Text = "Total Wait Time: ";
+            this.labeltotalcyclespassed = new System.Windows.Forms.Label();
+            this.labeltotalcyclespassed.Name = "labeltotalcyclespassed";
+            this.labeltotalcyclespassed.Text = "Total Cycles Passed: ";
+            this.labeltotalcycleswithoutchange = new System.Windows.Forms.Label();
+            this.labeltotalcycleswithoutchange.Name = "labeltotalcycleswithoutchange";
+            this.labeltotalcycleswithoutchange.Text = "Total Cycles Without Change: ";
+            this.labeltotalcarspassednumber = new System.Windows.Forms.Label();
+            this.labeltotalcarspassednumber.Name = "labeltotalcarspassednumber";
+            this.labeltotalwaittimenumber = new System.Windows.Forms.Label();
+            this.labeltotalwaittimenumber.Name = "labeltotalwaittimenumber";
+            this.labeltotalcyclespassednumber = new System.Windows.Forms.Label();
+            this.labeltotalcyclespassednumber.Name = "labeltotalcyclespassednumber";
+            this.labeltotalcycleswithoutchangenumber = new System.Windows.Forms.Label();
+            this.labeltotalcycleswithoutchangenumber.Name = "labeltotalcycleswithoutchangenumber";
+
+            this.Controls.Add(this.labelnorth);
+            this.Controls.Add(this.labeleast);
+            this.Controls.Add(this.labelsouth);
+            this.Controls.Add(this.labelwest);
+            this.Controls.Add(this.labelnorthnumber);
+            this.Controls.Add(this.labeleastnumber);
+            this.Controls.Add(this.labelsouthnumber);
+            this.Controls.Add(this.labelwestnumber);
+            this.Controls.Add(this.labelnorthwait);
+            this.Controls.Add(this.labeleastwait);
+            this.Controls.Add(this.labelsouthwait);
+            this.Controls.Add(this.labelwestwait);
+            this.Controls.Add(this.labelnorthwaitnumber);
+            this.Controls.Add(this.labeleastwaitnumber);
+            this.Controls.Add(this.labelsouthwaitnumber);
+            this.Controls.Add(this.labelwestwaitnumber);
+
+            this.Controls.Add(this.labeltotalcarspassed);
+            this.Controls.Add(this.labeltotalwaittime);
+            this.Controls.Add(this.labeltotalcyclespassed);
+            this.Controls.Add(this.labeltotalcycleswithoutchange);
+            this.Controls.Add(this.labeltotalcarspassednumber);
+            this.Controls.Add(this.labeltotalwaittimenumber);
+            this.Controls.Add(this.labeltotalcyclespassednumber);
+            this.Controls.Add(this.labeltotalcycleswithoutchangenumber);
+
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -108,14 +230,19 @@ namespace intersectionDisection
                     this.Paint += this.TekenFourWay;
                     break;
                 case "fourwayWithLeftLane":
+                    this.fourwayIntersection();
                     this.fourwayWithLeftLane();
                     this.Paint += this.TekenFourWayWithLeftLane;
                     break;
                 default:
-                    this.fourwayIntersection();
+                    //this.fourwayIntersection();
                     this.Paint += this.TekenFourWay;
                     break;
             }
+
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
 
             //this.Shown += StartSimulation;
             //this.Load += new System.EventHandler(this.Form1_Load);
@@ -126,201 +253,195 @@ namespace intersectionDisection
             this.ResumeLayout(false);
             this.PerformLayout();
         }
+
+
+        //Defines the labels for a standard fourway intersection
         private void fourwayIntersection()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelnorth = new System.Windows.Forms.Label();
-            this.labeleast = new System.Windows.Forms.Label();
-            this.labelsouth = new System.Windows.Forms.Label();
-            this.labelwest = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(435, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "North: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(985, 450);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "East: ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(535, 950);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "South: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(85, 550);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "West: ";
-            // 
-            // labelnorth
-            // 
-            this.labelnorth.AutoSize = true;
-            this.labelnorth.Location = new System.Drawing.Point(150, 50);
-            this.labelnorth.Name = "labelnorth";
-            this.labelnorth.Size = new System.Drawing.Size(35, 13);
-            this.labelnorth.TabIndex = 4;
-            this.labelnorth.Text = "North: ";
-            // 
-            // labeleast
-            // 
-            this.labeleast.AutoSize = true;
-            this.labeleast.Location = new System.Drawing.Point(350, 180);
-            this.labeleast.Name = "labeleast";
-            this.labeleast.Size = new System.Drawing.Size(35, 13);
-            this.labeleast.TabIndex = 5;
-            this.labeleast.Text = "East: ";
-            // 
-            // labelsouth
-            // 
-            this.labelsouth.AutoSize = true;
-            this.labelsouth.Location = new System.Drawing.Point(310, 350);
-            this.labelsouth.Name = "labelsouth";
-            this.labelsouth.Size = new System.Drawing.Size(35, 13);
-            this.labelsouth.TabIndex = 6;
-            this.labelsouth.Text = "South: ";
-            // 
-            // labelwest
-            // 
-            this.labelwest.AutoSize = true;
-            this.labelwest.Location = new System.Drawing.Point(50, 210);
-            this.labelwest.Name = "labelwest";
-            this.labelwest.Size = new System.Drawing.Size(35, 13);
-            this.labelwest.TabIndex = 7;
-            this.labelwest.Text = "West: ";
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelnorth);
-            this.Controls.Add(this.labeleast);
-            this.Controls.Add(this.labelsouth);
-            this.Controls.Add(this.labelwest);
+            int x = 600;
+            int x2 = 680;
+            int y = 100;
+            int k = 20;
+            int k2 = 500;
+
+            int controlmin = 0;
+            int countname = 1;
+            int countnamenumber = 1;
+            int countcycles = 1;
+            int countcyclesnumber = 1;
+            int counttotals = 1;
+            int counttotalsnumber = 1;
+
+            for (int t = 0; t < Controls.Count; t++)
+            {
+                Control c = this.Controls[t];
+
+
+                if (c is Label)
+                {
+                    c.AutoSize = true;
+                    c.Size = new System.Drawing.Size(35, 13);
+                    c.TabIndex = t - controlmin;
+
+                    if (c.Name.Contains("total"))
+                    {
+                        if (c.Name.Contains("number"))
+                        {
+                            c.Location = new System.Drawing.Point(x2 + 80, counttotalsnumber * k + k2 );
+                            counttotalsnumber++;
+                        }
+                        else
+                        {
+                            c.Location = new System.Drawing.Point(x, counttotals * k + k2);
+                            counttotals++;
+                        }
+                    }
+                    else
+                    {
+                        if (c.Name.Contains("wait"))
+                        {
+                            if (c.Name.Contains("number"))
+                            {
+                                c.Location = new System.Drawing.Point(x2, countcyclesnumber * y + k);
+                                c.Text = "0";
+                                countcyclesnumber++;
+                            }
+                            else
+                            {
+                                c.Location = new System.Drawing.Point(x, countcycles * y + k);
+                                countcycles++;
+                            }
+                        }
+                        else
+                        {
+                            if (c.Name.Contains("number"))
+                            {
+                                c.Location = new System.Drawing.Point(x2, countnamenumber * y);
+                                c.Text = "0";
+                                countnamenumber++;
+                            }
+                            else
+                            {
+                                c.Location = new System.Drawing.Point(x, countname * y);
+                                countname++;
+                            }
+                        }
+                    }                    
+                }
+                else
+                {
+                    controlmin++;
+                }
+            }
         }
 
+        //Defines the extra lanes needed for a fourlane intersection with extra left lane.
         private void fourwayWithLeftLane()
         {
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.labelnorth = new System.Windows.Forms.Label();
-            this.labeleast = new System.Windows.Forms.Label();
-            this.labelsouth = new System.Windows.Forms.Label();
-            this.labelwest = new System.Windows.Forms.Label();
-            this.SuspendLayout();
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(435, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(35, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "North: ";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(985, 450);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(35, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "East: ";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(535, 950);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(35, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "South: ";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(85, 550);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(35, 13);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "West: ";
-            // 
-            // labelnorth
-            // 
-            this.labelnorth.AutoSize = true;
-            this.labelnorth.Location = new System.Drawing.Point(400, 50);
-            this.labelnorth.Name = "labelnorth";
-            this.labelnorth.Size = new System.Drawing.Size(35, 13);
-            this.labelnorth.TabIndex = 4;
-            this.labelnorth.Text = "North: ";
-            // 
-            // labeleast
-            // 
-            this.labeleast.AutoSize = true;
-            this.labeleast.Location = new System.Drawing.Point(950, 450);
-            this.labeleast.Name = "labeleast";
-            this.labeleast.Size = new System.Drawing.Size(35, 13);
-            this.labeleast.TabIndex = 5;
-            this.labeleast.Text = "East: ";
-            // 
-            // labelsouth
-            // 
-            this.labelsouth.AutoSize = true;
-            this.labelsouth.Location = new System.Drawing.Point(500, 950);
-            this.labelsouth.Name = "labelsouth";
-            this.labelsouth.Size = new System.Drawing.Size(35, 13);
-            this.labelsouth.TabIndex = 6;
-            this.labelsouth.Text = "South: ";
-            // 
-            // labelwest
-            // 
-            this.labelwest.AutoSize = true;
-            this.labelwest.Location = new System.Drawing.Point(50, 550);
-            this.labelwest.Name = "labelwest";
-            this.labelwest.Size = new System.Drawing.Size(35, 13);
-            this.labelwest.TabIndex = 7;
-            this.labelwest.Text = "West: ";
-            // 
-            // Form1
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.labelnorth);
-            this.Controls.Add(this.labeleast);
-            this.Controls.Add(this.labelsouth);
-            this.Controls.Add(this.labelwest);
+            this.labelnorthnumber2 = new System.Windows.Forms.Label();
+            this.labelnorthnumber2.Name = "labelnorthnumber2";
+            this.labeleastnumber2 = new System.Windows.Forms.Label();
+            this.labeleastnumber2.Name = "labeleastnumber2";
+            this.labelsouthnumber2 = new System.Windows.Forms.Label();
+            this.labelsouthnumber2.Name = "labelsouthnumber2";
+            this.labelwestnumber2 = new System.Windows.Forms.Label();
+            this.labelwestnumber2.Name = "labelwestnumber2";
+
+            this.labelnorthwaitnumber2 = new System.Windows.Forms.Label();
+            this.labelnorthwaitnumber2.Name = "labelnorthwaitnumber2";
+            this.labeleastwaitnumber2 = new System.Windows.Forms.Label();
+            this.labeleastwaitnumber2.Name = "labeleastwaitnumber2";
+            this.labelsouthwaitnumber2 = new System.Windows.Forms.Label();
+            this.labelsouthwaitnumber2.Name = "labelsouthwaitnumber2";
+            this.labelwestwaitnumber2 = new System.Windows.Forms.Label();
+            this.labelwestwaitnumber2.Name = "labelwestwaitnumber2";
+
+            this.Controls.Add(this.labelnorthnumber2);
+            this.Controls.Add(this.labeleastnumber2);
+            this.Controls.Add(this.labelsouthnumber2);
+            this.Controls.Add(this.labelwestnumber2);
+
+            this.Controls.Add(this.labelnorthwaitnumber2);
+            this.Controls.Add(this.labeleastwaitnumber2);
+            this.Controls.Add(this.labelsouthwaitnumber2);
+            this.Controls.Add(this.labelwestwaitnumber2);
+
+            int x = 600;
+            int x2 = 680;
+            int x3 = 760;
+            int y = 100;
+            int k = 20;
+
+            int controlmin = 0;
+            int countx4 = 1;
+            int countx3 = 1;
+            int countx2 = 1;
+            int countx = 1;
+
+            for (int t = 0; t < Controls.Count; t++)
+            {
+                Control c = this.Controls[t];
+
+                if (c is Label && c.Location.IsEmpty)
+                {
+                    c.AutoSize = true;
+                    c.Size = new System.Drawing.Size(35, 13);
+                    c.TabIndex = t - controlmin;
+
+                    if (c.Name.Contains("2"))
+                    {
+                        if (c.Name.Contains("wait"))
+                        {
+                            c.Location = new System.Drawing.Point(x3, countx3 * y + k);
+                            c.Text = "0";
+                            countx3++;
+                        }
+                        else
+                        {
+                            c.Location = new System.Drawing.Point(x3, countx4 * y);
+                            c.Text = "0";
+                            countx4++;
+                        }
+                    }
+                    else
+                    {
+                        if (c.Name.Contains("wait"))
+                        {
+                            if (c.Name.Contains("number"))
+                            {
+                                c.Location = new System.Drawing.Point(x2, countx2 * y + k);
+                                c.Text = "0";
+                                countx2++;
+                            }
+                            else
+                            {
+                                c.Location = new System.Drawing.Point(x, countx * y + k);
+                                countx++;
+                            }
+                        }
+                        else
+                        {
+                            if (c.Name.Contains("number"))
+                            {
+                                c.Location = new System.Drawing.Point(x2, countx2 * y);
+                                c.Text = "0";
+                                countx2++;
+                            }
+                            else
+                            {
+                                c.Location = new System.Drawing.Point(x, countx * y);
+                                countx++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    controlmin++;
+                }
+            }
         }
+
         #endregion
 
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
