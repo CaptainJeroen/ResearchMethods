@@ -135,7 +135,7 @@ namespace intersectionDisection
         int maxCyclesWithoutGreen;
         public int[] cyclesWithoutChange;
 
-        public TrafficLights(int max, Intersection i,int l)
+        public TrafficLights(int max, Intersection i, int l)
         {
 
             maxCyclesWithoutGreen = max;
