@@ -165,7 +165,6 @@ namespace intersectionDisection
             }
             return frequencyArray;
 
-
         }
         private void UpdateChart2()
         {
@@ -273,7 +272,7 @@ namespace intersectionDisection
                     this.labelsouthnumber.Text = this.intersection.lanes[4].Count.ToString();
                     this.labelwestnumber.Text = this.intersection.lanes[6].Count.ToString();
                     this.labelnorthnumber2.Text = this.intersection.lanes[1].Count.ToString();
-                    this.labeleastnumber2.Text = this.intersection.lanes[2].Count.ToString();
+                    this.labeleastnumber2.Text = this.intersection.lanes[3].Count.ToString();
                     this.labelsouthnumber2.Text = this.intersection.lanes[5].Count.ToString();
                     this.labelwestnumber2.Text = this.intersection.lanes[7].Count.ToString();
                     this.labelnorthwaitnumber.Text = GetTotalWaitingTimeLane(this.intersection.lanes[0]).ToString();
@@ -365,6 +364,12 @@ namespace intersectionDisection
             Brush verLt = this.intersection.trafficLights[1] ? Brushes.Green : Brushes.Red;
             Brush horSt = this.intersection.trafficLights[2] ? Brushes.Green : Brushes.Red;
             Brush horLt = this.intersection.trafficLights[3] ? Brushes.Green : Brushes.Red;
+            //
+            Brush verSt2 = this.intersection.trafficLights[4] ? Brushes.Green : Brushes.Red;
+            Brush verLt2 = this.intersection.trafficLights[5] ? Brushes.Green : Brushes.Red;
+            Brush horSt2 = this.intersection.trafficLights[6] ? Brushes.Green : Brushes.Red;
+            Brush horLt2 = this.intersection.trafficLights[7] ? Brushes.Green : Brushes.Red;
+
             Pen dashPen = new Pen(Color.Black, 1) { DashPattern = new[] { 5f, 5f } };
             Pen smalPen = new Pen(Color.Black, 1);
             Pen bigPen = new Pen(Color.Black, 2);
@@ -391,15 +396,15 @@ namespace intersectionDisection
             gr.DrawLine(dashPen, 350, 250, 425, 250);
 
             gr.FillEllipse(horSt, 180, 320, 20, 20);
-            gr.FillEllipse(horSt, 350, 210, 20, 20);
+            gr.FillEllipse(horSt2, 350, 210, 20, 20);
             gr.FillEllipse(horLt, 180, 270, 20, 20);
-            gr.FillEllipse(horLt, 350, 260, 20, 20);
+            gr.FillEllipse(horLt2, 350, 260, 20, 20);
 
 
             gr.FillEllipse(verSt, 210, 180, 20, 20);
-            gr.FillEllipse(verSt, 320, 350, 20, 20);
+            gr.FillEllipse(verSt2, 320, 350, 20, 20);
             gr.FillEllipse(verLt, 260, 180, 20, 20);
-            gr.FillEllipse(verLt, 270, 350, 20, 20);
+            gr.FillEllipse(verLt2, 270, 350, 20, 20);
 
         }
 
