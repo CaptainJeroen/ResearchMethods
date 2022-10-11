@@ -20,10 +20,10 @@ namespace intersectionDisection
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
 
-        private string fileName = "test";
-        private int maxWOGreen = 5;
-        private int[] carsIn = new int[] { };
-        private int carsThrough = 10;
+        private string fileName = "sim5ver4";
+        private int maxWOGreen = 9;
+        private int[] carsIn = new int[] { 1, 2, 1, 2, 2, 2, 8, 7 };
+        private int carsThrough = 12;
 
 
         public delegate void delUpdateTextBox(string text);
@@ -95,6 +95,10 @@ namespace intersectionDisection
                 sw.WriteLine(maxWOGreen);
                 sw.WriteLine(string.Join(" ", carsIn));
                 sw.WriteLine(carsThrough);
+                sw.WriteLine(intersection.switchedTrafficLight);
+                sw.WriteLine(intersection.totalCarsPassed);
+                sw.WriteLine(intersection.totalWaitTime);
+
                 sw.WriteLine("carsInLane");
                 this.intersection.carsInLane.ForEach(e =>
                 {
