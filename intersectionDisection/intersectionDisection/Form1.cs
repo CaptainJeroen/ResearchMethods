@@ -104,13 +104,13 @@ namespace intersectionDisection
                 {
                     sw.WriteLine(string.Join(" ", e));
                 });
-                sw.WriteLine("");
+                sw.WriteLine("*");
                 sw.WriteLine("waitingTimeCarsGone");
                 foreach(int i in waitingTimeCarsGone)
                 {
                     sw.WriteLine(i);
                 }
-                sw.WriteLine("");
+                sw.WriteLine("*");
                 sw.WriteLine("waitingTimeCarsLeft");
                 foreach (int i in waitingTimeCarsLeft)
                 {

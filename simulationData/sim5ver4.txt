@@ -106,7 +106,7 @@ carsInLane
 9 50 7 54 54 18 72 7
 10 52 1 56 56 20 68 14
 1 42 2 58 58 22 76 21
-
+*
 waitingTimeCarsGone
 365
 125
@@ -151,7 +151,7 @@ waitingTimeCarsGone
 4
 0
 4
-
+*
 waitingTimeCarsLeft
 0
 25
