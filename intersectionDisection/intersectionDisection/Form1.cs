@@ -20,8 +20,8 @@ namespace intersectionDisection
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
 
-        private string fileName = "sim12fr100";
-        private int maxWOGreen = 100;
+        private string fileName = "sim12fr2";
+        private int maxWOGreen = 2;
         private int[] carsIn = new int[] { 9, 9, 1, 1, 1, 1, 1, 1 }; //24
         private int carsThrough = 15;
 
