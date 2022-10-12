@@ -203,7 +203,8 @@ namespace intersectionDisection
             for (int i = 0; i < configs.Length; i++)
             {
                 if (cyclesWithoutChange[configs[i].Item1] >= maxCyclesWithoutGreen || cyclesWithoutChange[configs[i].Item2] >= maxCyclesWithoutGreen)
-                    if (cyclesWithoutChange[configs[i].Item1] + cyclesWithoutChange[configs[i].Item2] > biggest.Item1 + biggest.Item2)
+                    if (biggest.Item1 < 0) biggest = configs[i];
+                    else if (cyclesWithoutChange[configs[i].Item1] + cyclesWithoutChange[configs[i].Item2] > cyclesWithoutChange[biggest.Item1] + cyclesWithoutChange[biggest.Item2])
                     {
                         biggest = configs[i];
                     }
