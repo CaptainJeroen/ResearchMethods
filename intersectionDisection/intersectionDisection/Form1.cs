@@ -13,6 +13,7 @@ using System.Windows.Forms;
 
 namespace intersectionDisection
 {
+   
     public partial class Form1 : Form
     {
         public Intersection intersection;
@@ -20,9 +21,9 @@ namespace intersectionDisection
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
 
-        private string fileName = "sim9fr9";
-        private int maxWOGreen = 9;
-        private int[] carsIn = new int[] { 7, 3, 1, 1, 7, 3, 1, 1 }; //24
+        private string fileName;
+        private int maxWOGreen;
+        private int[] carsIn; //24
         private int carsThrough = 15;
 
 
@@ -36,12 +37,7 @@ namespace intersectionDisection
 
         public Form1()
         {
-            int lanes = 8;
-            this.trafficLights = new TrafficLights(this.maxWOGreen, this.intersection, lanes);
-            this.intersection = new Intersection(this.carsIn, this.carsThrough, this.trafficLights, lanes);
-                                                        
-            //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
-            this.trafficLights.intersection = this.intersection;
+
             this.InitializeComponent(whatInt);
 
             threadStart = new ThreadStart(StartSimulation);
@@ -51,16 +47,48 @@ namespace intersectionDisection
 
         public void StartSimulation()
         {
-            while (intersection.cyclesPassed<=100)
+            for (int sim = 1; sim <= 30; sim++)
             {
-                this.intersection.Model();
-                this.UpdateLaneCount();
-                //this.UpdateLabels();
-                this.Invalidate();
-                Thread.Sleep(1);
+                carsIn = makeCarsIn();
+                for (int i = 1; i < 12; i++)
+                {
+                    if (i == 11) i = 100;
+                    fileName = $"sim{sim}fr{i}";
+                    maxWOGreen = i;
+                    int lanes = 8;
+                    this.trafficLights = new TrafficLights(this.maxWOGreen, this.intersection, lanes);
+                    this.intersection = new Intersection(this.carsIn, this.carsThrough, this.trafficLights, lanes);
+
+                    //this.intersection = new Intersection(new int[] { 4, 3, 4, 1 }, 10, this.trafficLights);
+                    this.trafficLights.intersection = this.intersection;
+
+                    while (intersection.cyclesPassed <= 100)
+                    {
+                        this.intersection.Model();
+                    }
+                    //UpdateChart();
+                    WriteToFile();
+                }
+            } 
+
+
+            this.UpdateLaneCount();
+            this.UpdateLabels();
+            this.Invalidate();
+
+        }
+
+        private int[] makeCarsIn()
+        {
+            Random r = new Random();
+            int[] ans = new int[8];
+
+            for (int i = 0; i < 24; i++)
+            {
+                ans[r.Next(0, 8)]++;
             }
-            UpdateChart();
-            WriteToFile();
+
+            return ans;
         }
 
 
@@ -86,7 +114,7 @@ namespace intersectionDisection
         {
             DateTime currentDateTime = DateTime.Now;
             string curpath = Directory.GetCurrentDirectory();
-            string path = Path.GetFullPath(Path.Combine(curpath, @"..\..\..\..\")) + "simulationData\\" + this.fileName + ".txt";
+            string path = Path.GetFullPath(Path.Combine(curpath, @"..\..\..\..\")) + "simronde2\\" + this.fileName + ".txt";
             int[] waitingTimeCarsGone = CountOccurrencesWaitTime(this.intersection.waitingTimes);
             int[] waitingTimeCarsLeft = CountOccurrencesWaitTime2();
 
