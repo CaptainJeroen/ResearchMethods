@@ -26,6 +26,8 @@ namespace intersectionDisection
         private int[] carsIn; //24
         private int carsThrough = 15;
 
+        Random r = new Random();
+
 
         public delegate void delUpdateTextBox(string text);
         //public delegate void delUpdateTextBox1(string text);
@@ -80,7 +82,6 @@ namespace intersectionDisection
 
         private int[] makeCarsIn()
         {
-            Random r = new Random();
             int[] ans = new int[8];
 
             for (int i = 0; i < 24; i++)
