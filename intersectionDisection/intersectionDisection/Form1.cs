@@ -20,7 +20,6 @@ namespace intersectionDisection
         public TrafficLights trafficLights;
         private string whatInt = "fourwayWithLeftLane"; // fourwayWithLeftLane, fourwayIntersection
 
-
         private string fileName;
         private int maxWOGreen;
         private int[] carsIn; //24
@@ -68,7 +67,9 @@ namespace intersectionDisection
                     {
                         this.intersection.Model();
                     }
-                    //UpdateChart();
+                    totalWaitingCars = 0;
+                    totatWaitTimeCarsLeft = 0;
+                    TotalWaitTimeCarsLeft();
                     WriteToFile();
                 }
             } 
@@ -79,7 +80,20 @@ namespace intersectionDisection
             this.Invalidate();
 
         }
+        float totatWaitTimeCarsLeft = 0;
+        int totalWaitingCars = 0;
+        void TotalWaitTimeCarsLeft()
+        {
+            for (int i = 0; i < this.intersection.lanes.Length; i++)
+            {
+                totalWaitingCars += this.intersection.lanes[i].Count();
+                for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
+                {
+                    totatWaitTimeCarsLeft += this.intersection.lanes[i][j].waitingTime;
 
+                }
+            }
+        }
         private int[] makeCarsIn()
         {
             int[] ans = new int[8];
@@ -127,7 +141,8 @@ namespace intersectionDisection
                 sw.WriteLine(intersection.switchedTrafficLight);
                 sw.WriteLine(intersection.totalCarsPassed);
                 sw.WriteLine(intersection.totalWaitTime);
-
+                sw.WriteLine(totatWaitTimeCarsLeft);
+                sw.WriteLine(totalWaitingCars);
                 sw.WriteLine("carsInLane");
                 this.intersection.carsInLane.ForEach(e =>
                 {
@@ -233,8 +248,11 @@ namespace intersectionDisection
             axis.Maximum = maxIndex + 2;
         }
         //Wachttijd van de auto's die nog wachten
+
+
         private int[] CountOccurrencesWaitTime2()
         {
+
             int totalWaitingCars = 0;
             float maxValue = 0;
             for (int i = 0; i < this.intersection.lanes.Length; i++)
