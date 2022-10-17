@@ -22,6 +22,7 @@ namespace intersectionDisection
         public int switchedTrafficLight = 0;
         public List<float> waitingTimes = new List<float>(); // wachtijden van alle auto's voordat ze door konden rijden
         public List<int[]> carsInLane = new List<int[]>(); // hoeveel auto's in lanes van alle rondes
+        public float longest = 0;
 
         public Intersection( int[] ci, int ct, TrafficLights tl, int l = 4)// l = 4 of 8 of 12 niks anders
         {
@@ -111,8 +112,10 @@ namespace intersectionDisection
             int amountToRemove = cars.Count < amount ? cars.Count : amount;  
             for(int i = 0; i< amountToRemove; i++)
             {
-                totalWaitTime += cars[0].waitingTime;// In een aparte list
+                totalWaitTime += cars[0].waitingTime;
                 waitingTimes.Add(cars[0].waitingTime);
+                if (cars[0].waitingTime > longest)
+                    longest = cars[0].waitingTime;
                 cars.RemoveAt(0);
             }
         }

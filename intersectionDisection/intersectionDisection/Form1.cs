@@ -80,6 +80,7 @@ namespace intersectionDisection
             this.Invalidate();
 
         }
+        
         float totatWaitTimeCarsLeft = 0;
         int totalWaitingCars = 0;
         void TotalWaitTimeCarsLeft()
@@ -89,6 +90,8 @@ namespace intersectionDisection
                 totalWaitingCars += this.intersection.lanes[i].Count();
                 for (int j = 0; j < this.intersection.lanes[i].Count(); j++)
                 {
+                    if (this.intersection.lanes[i][j].waitingTime > this.intersection.longest)
+                        this.intersection.longest = this.intersection.lanes[i][j].waitingTime;
                     totatWaitTimeCarsLeft += this.intersection.lanes[i][j].waitingTime;
 
                 }
@@ -143,6 +146,7 @@ namespace intersectionDisection
                 sw.WriteLine(intersection.totalWaitTime);
                 sw.WriteLine(totatWaitTimeCarsLeft);
                 sw.WriteLine(totalWaitingCars);
+                sw.WriteLine(this.intersection.longest);
                 sw.WriteLine("carsInLane");
                 this.intersection.carsInLane.ForEach(e =>
                 {
