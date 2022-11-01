@@ -79,7 +79,7 @@ namespace intersectionDisection
                     score = 0;
                     TotalWaitTimeCarsLeft();
                     totalSqauredWaitime = waitTimeWaitingCarsSqaured + this.intersection.waitTimeSqaured;
-                    score = (totalSqauredWaitime / (totalWaitingCars + this.intersection.totalCarsPassed)) - this.intersection.totalCarsPassed/10;
+                    score = (totalSqauredWaitime / (totalWaitingCars + this.intersection.totalCarsPassed)) - this.intersection.totalCarsPassed / 10;// + this.intersection.longest * this.intersection.longest;
                     WriteToFile();
                 }
             } 
@@ -103,7 +103,7 @@ namespace intersectionDisection
                     if (this.intersection.lanes[i][j].waitingTime > this.intersection.longest)
                         this.intersection.longest = this.intersection.lanes[i][j].waitingTime;
                     totatWaitTimeCarsLeft += this.intersection.lanes[i][j].waitingTime;
-                    waitTimeWaitingCarsSqaured += this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime;
+                    waitTimeWaitingCarsSqaured += this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime;
                 }
             }
         }
