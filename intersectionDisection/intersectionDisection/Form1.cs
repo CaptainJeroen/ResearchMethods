@@ -24,14 +24,21 @@ namespace intersectionDisection
         private int maxWOGreen;
         private int[] carsIn; //24
         private int carsThrough = 15;
-
+        public float waitTimeWaitingCarsSqaured = 0;
+        public float totalSqauredWaitime = 0;
+        public float score = 0;
         Random r = new Random();
-
 
         public delegate void delUpdateTextBox(string text);
         //public delegate void delUpdateTextBox1(string text);
         public delegate void delUpdateChart();
-
+        public List<int[]> influxes = new List<int[]>() 
+        { new int[] { 3, 2, 2, 2, 6, 5, 4, 0 }, new int[] { 1, 4, 3 ,3, 3 ,2 ,1 ,7 }, new int[] {3, 4, 1, 4 ,2, 3, 5, 2 }, new int[] {0, 2, 2, 5, 3 ,2 ,3 ,7 }, new int[] { 4, 2 ,2 ,3 ,2 ,5, 4 ,2}, 
+            new int[] {3, 6 ,2 ,4 ,3 ,2 ,2 ,2 }, new int[] { 3, 5, 3 ,1 ,5 ,4, 2, 1}, new int[] { 0, 4 ,4 ,3 ,3 ,5 ,3 ,2}, new int[] { 3, 4, 2, 4 ,5, 1, 1, 4}, new int[] { 5, 3 ,5 ,4 ,1 ,1 ,2 ,3},
+            new int[] {6, 2, 2, 5 ,2 ,3 ,1 ,3 }, new int[] {6 ,4, 3 ,5 ,0 ,1 ,2 ,3 }, new int[] { 3, 4, 5, 2, 2, 6, 1, 1}, new int[] { 3, 6, 6, 0, 2, 1, 2, 4}, new int[] {3, 3, 5, 1, 5, 3, 3, 1 },
+            new int[] { 1 ,2 ,4 ,4 ,3, 3, 4, 3}, new int[] {2 ,2 ,3 ,6 ,2 ,1 ,6 ,2 }, new int[] {3, 3, 0, 8, 0 ,3, 4 ,3 }, new int[] { 4 ,1 ,4 ,4 ,5 ,1 ,3 ,2}, new int[] {5, 3, 2, 3, 3, 2, 5 ,1 },
+            new int[] {6, 0 ,3 ,1 ,2 ,3, 2, 7 }, new int[] {8 ,1 ,1 ,3 ,5 ,1, 5 ,0 }, new int[] { 2, 1 ,3 ,1 ,3 ,4 ,4 ,6}, new int[] {2, 5, 6 ,2 ,3 ,2 ,4 ,0 }, new int[] {2, 3, 4 ,6 ,0 ,3, 1 ,5 },
+            new int[] {2, 2, 1 ,4, 5 ,3, 3, 4 }, new int[] { 2 ,3 ,3 ,5 ,3 ,2 ,2 ,4}, new int[] {3, 5 ,3 ,3 ,3 ,3 ,1 ,3 }, new int[] { 2, 3, 2 ,3, 1, 6 ,3, 4}, new int[] { 4 ,4 ,3 ,5 ,2 ,1 ,2, 3}};
 
         Thread updateThread;
         ThreadStart threadStart;
@@ -40,7 +47,6 @@ namespace intersectionDisection
         {
 
             this.InitializeComponent(whatInt);
-
             threadStart = new ThreadStart(StartSimulation);
             updateThread = new Thread(threadStart);
             updateThread.Start();
@@ -50,7 +56,7 @@ namespace intersectionDisection
         {
             for (int sim = 1; sim <= 30; sim++)
             {
-                carsIn = makeCarsIn();
+                carsIn = influxes[sim -1];//makeCarsIn();
                 for (int i = 1; i < 12; i++)
                 {
                     if (i == 11) i = 100;
@@ -69,7 +75,11 @@ namespace intersectionDisection
                     }
                     totalWaitingCars = 0;
                     totatWaitTimeCarsLeft = 0;
+                    waitTimeWaitingCarsSqaured = 0;
+                    score = 0;
                     TotalWaitTimeCarsLeft();
+                    totalSqauredWaitime = waitTimeWaitingCarsSqaured + this.intersection.waitTimeSqaured;
+                    score = (totalSqauredWaitime / (totalWaitingCars + this.intersection.totalCarsPassed)) - this.intersection.totalCarsPassed/10;
                     WriteToFile();
                 }
             } 
@@ -93,7 +103,7 @@ namespace intersectionDisection
                     if (this.intersection.lanes[i][j].waitingTime > this.intersection.longest)
                         this.intersection.longest = this.intersection.lanes[i][j].waitingTime;
                     totatWaitTimeCarsLeft += this.intersection.lanes[i][j].waitingTime;
-
+                    waitTimeWaitingCarsSqaured += this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime;
                 }
             }
         }
@@ -147,6 +157,7 @@ namespace intersectionDisection
                 sw.WriteLine(totatWaitTimeCarsLeft);
                 sw.WriteLine(totalWaitingCars);
                 sw.WriteLine(this.intersection.longest);
+                sw.WriteLine(score);
                 sw.WriteLine("carsInLane");
                 this.intersection.carsInLane.ForEach(e =>
                 {
