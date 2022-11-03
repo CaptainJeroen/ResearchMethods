@@ -78,8 +78,8 @@ namespace intersectionDisection
                     waitTimeWaitingCarsSqaured = 0;
                     score = 0;
                     TotalWaitTimeCarsLeft();
-                    totalSqauredWaitime = waitTimeWaitingCarsSqaured + this.intersection.waitTimeSqaured;
-                    score = (totalSqauredWaitime / (totalWaitingCars + this.intersection.totalCarsPassed)) - this.intersection.totalCarsPassed / 10;// + this.intersection.longest * this.intersection.longest;
+                    totalSqauredWaitime = -1 * (waitTimeWaitingCarsSqaured + this.intersection.waitTimeSqaured);
+                    score = (totalSqauredWaitime / (totalWaitingCars + this.intersection.totalCarsPassed)) + this.intersection.totalCarsPassed / 10;// + this.intersection.longest * this.intersection.longest;
                     WriteToFile();
                 }
             } 
