@@ -114,7 +114,7 @@ namespace intersectionDisection
             for(int i = 0; i< amountToRemove; i++)
             {
                 totalWaitTime += cars[0].waitingTime;
-                waitTimeSqaured += cars[0].waitingTime * cars[0].waitingTime * cars[0].waitingTime;
+                waitTimeSqaured += cars[0].waitingTime * cars[0].waitingTime;
                 waitingTimes.Add(cars[0].waitingTime);
                 if (cars[0].waitingTime > longest)
                     longest = cars[0].waitingTime;

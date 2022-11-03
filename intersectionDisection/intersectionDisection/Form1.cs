@@ -103,7 +103,7 @@ namespace intersectionDisection
                     if (this.intersection.lanes[i][j].waitingTime > this.intersection.longest)
                         this.intersection.longest = this.intersection.lanes[i][j].waitingTime;
                     totatWaitTimeCarsLeft += this.intersection.lanes[i][j].waitingTime;
-                    waitTimeWaitingCarsSqaured += this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime;
+                    waitTimeWaitingCarsSqaured += this.intersection.lanes[i][j].waitingTime * this.intersection.lanes[i][j].waitingTime;
                 }
             }
         }
